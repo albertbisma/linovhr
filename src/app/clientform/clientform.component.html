@@ -1,0 +1,63 @@
+<section id="team" class="pb-5">
+  <div class="container-fluid">
+      <p-growl [(value)]="msgs"></p-growl>
+
+    <div class="col-sm-6 mx-auto">
+        <div class="card shadow-lg ">       
+          <div class="card-header">
+              <h2 class="card-title">Create New Client</h2>
+              <h6>field with  <font color="red">*</font> is required.</h6>
+          </div>   
+          <div class="card-body">            
+              <form [formGroup]="clientForm" class="justify-content-center" (ngSubmit) ="onFormSubmit()">      
+                  <div class="form-group row">                    
+                      <div class="col-sm-4" align="right">
+                          <label for="clientcode">Client Code <font color="red">*)</font></label>            
+                        </div>
+                          <div class="col-sm-6">
+                            <input type="clientcode" class="form-control" id="clientcode" placeholder="Input client code here" formControlName="kodeClient" required>
+                            <br>
+                          </div>
+                          
+
+                    <div class="col-sm-4" align="right">
+                      <label for="clientname">Client Name <font color="red">*)</font></label>            
+                    </div>
+                      <div class="col-sm-6">
+                        <input type="clientname" class="form-control" id="clientname" placeholder="Input client name here" formControlName="nama" required>
+                        <br>
+                      </div>                                                 
+                                          
+                      <div class="col-sm-4" align="right">
+                        <label for="clientname">Logo Client <font color="red">*)</font></label>            
+                      </div>
+          
+                      <div class="col-sm-6">
+                        <div class="custom-file">
+                          <input type="file" (change)="onFileSelected($event)" fileInput class="custom-file-input" id="customFile">
+                          <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div><br><br>
+                      </div>                                
+          
+                      <div class="col-sm-4" align="right">
+                        <label for="status">Status</label>            
+                      </div>  
+                    
+                      <div class="col-sm-6" >
+                        <label class="containercheck">
+                            <input type="checkbox" checked="checked" formControlName="aktif"> <h6>Aktif</h6>
+                            <span class="checkmark"></span>
+                        </label>
+                      </div>            
+          
+                  </div>  
+                  
+                  <div class="col-sm-8" align="right">
+                    <button type="submit" (click)="onUpload()" class="btn btn-primary">Submit</button>   
+                    <button type="submit" class="btn btn-primary" routerLink="/client">Cancel</button>                       
+                  </div>        
+             </form>           
+          </div>
+        </div>
+      </div>            
+  </div>

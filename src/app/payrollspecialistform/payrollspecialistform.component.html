@@ -1,0 +1,115 @@
+<section id="team" class="pb-5">
+    <div class="container-fluid">
+        <div class="alert alert-danger" role="alert" style="display:none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            data failed to create! please check your input!
+          </div>
+        <div class="alert alert-success" role="alert" style="display:none;"><i class="fa fa-check" aria-hidden="true"></i>
+            data successfully created!
+          </div>
+          
+                  
+      <div class="col-sm-6 mx-auto">
+          <div class="card shadow-lg ">       
+            <div class="card-header">
+                <h2 class="card-title">Create New Payroll Specialist</h2>
+                <h6>field with  <font color="red">*</font> is required.</h6>
+            </div>   
+            <div class="card-body">            
+                <form [formGroup]="payrollForm" class="justify-content-center" (ngSubmit)="onFormSubmit()">      
+                    <div class="form-group row">
+                                  
+                        <div class="col-sm-5" align="right">
+                            <label for="telephone">User Already Exist?</label>            
+                        </div>  
+                        
+                        <div class="col-sm-7">
+                          <label class="containercheck">
+                              <input id="userexist" type="checkbox" checked="checked"> <h6>Yes</h6>
+                              <span class="checkmark"></span>
+                          </label>
+                        </div>                                             
+                        
+                        <div class="col-sm-5 emailnotexist" align="right" style="display: none">
+                          <label for="email">Email <font color="red">*)</font></label>            
+                        </div>
+                            
+                        <div class="col-sm-7 emailnotexist" formGroupName="user" style="display: none">
+                          <input type="text" formControlName="email" class="form-control" placeholder="Input Email here" required>
+                          <br>
+                        </div>                      
+                                
+                        <div class="col-sm-5 emailisexist"  align="right">
+                            <label for="useraccount">Email 
+                              <font color="red">*)</font></label>
+                          </div>
+                                        
+                          <div formGroupName="user" class="col-sm-7 emailisexist" style="display:block">
+                            <select name="user" formControlName="idUser">
+                              <option value="">-- Select Email User --</option>
+                              <option *ngFor="let payroll of payrolls" value="{{payroll.idUser}}">{{payroll.email}}</option>                             
+                            </select>
+                            <br><br>
+                          </div>                                                                
+                                    
+          
+                      <div class="col-sm-5" align="right">
+                        <label for="kodepayroll">Payroll Specialist Code <font color="red">*)</font></label>            
+                      </div>
+                        
+                      <div class="col-sm-7">
+                        <input type="text" class="form-control" id="kodepayroll" placeholder="Input payroll specialist code here" formControlName="kodePs"required>
+                        <br>
+                      </div>                                
+          
+                      <div class="col-sm-5" align="right">
+                          <label for="namapayroll">Payroll Specialist Name <font color="red">*)</font></label>            
+                        </div>                              
+          
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" id="namapayroll" placeholder="Input payroll specialist name here" formControlName="nama" required>
+                          <br>
+                        </div>                                  
+          
+                        <div class="col-sm-5" align="right">
+                            <label for="address">Address <font color="red">*)</font></label>            
+                          </div>
+                            
+                          <div class="col-sm-7">
+                              <textarea class="form-control" name="" id="" rows="3" placeholder="Input Address here" formControlName="alamat" required></textarea>
+                            <br>
+                          </div>                                                                                                        
+          
+                    <div class="col-sm-5" align="right">
+                        <label for="telephone">Telephone Number</label>            
+                    </div>
+                        
+                      <div class="col-sm-7">
+                          <input type="number" class="form-control" id="telephone" placeholder="Input telephone number here" formControlName="telp">
+                        <br>
+                      </div>
+                              
+                      
+                      <div class="col-sm-5" align="right">
+                          <label for="telephone">Status</label>            
+                      </div>  
+                      
+                      <div class="col-sm-7">
+                        <label class="containercheck">
+                            <input type="checkbox" checked="checked" formControlName="aktif"> <h6>Active</h6>
+                            <span class="checkmark"></span>
+                        </label>
+                      </div>            
+          
+                    </div>  
+                    
+                    <div class="col-sm-8" align="right">
+                      <button type="submit" class="btn btn-primary">Submit</button>   
+                      <button type="submit" class="btn btn-primary" routerLink="/payroll">Cancel</button>                       
+                    </div>        
+               </form>            
+            </div>
+          </div>
+        </div>
+
+              
+    </div>   

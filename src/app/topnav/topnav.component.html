@@ -1,0 +1,106 @@
+<!------ Include the above in your HEAD tag ---------->
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" routerLink="">LinovHR</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fa fa-home"></i>
+          Home
+          <span class="sr-only">(current)</span>
+          </a>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-folder">            
+          </i>
+          Master
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/user" >User Account</a>
+          <a class="dropdown-item" routerLink="/management">Management</a>
+          <a class="dropdown-item" routerLink="/payroll">Payroll Specialist</a>
+          <a class="dropdown-item" routerLink="/client">Client</a>
+          <a class="dropdown-item" routerLink="/tasktype">Task Type</a>
+          <div class="dropdown-divider"></div>          
+        </div>
+      </li> 
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-file">            
+          </i>
+          Report          
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+          <a class="dropdown-item" routerLink="/rptpayroll">By Payroll Specialist</a>
+          <a class="dropdown-item" routerLink="/rptcompany">By Company</a>
+          <div class="dropdown-divider"></div>          
+        </div>
+      </li> 
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/mappingindex">
+            <i class="fa fa-map-signs" aria-hidden="true">
+          </i>            
+          Mapping Client
+        </a>
+      </li>   -->
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dschedule" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-calendar">            
+            </i>
+            Schedule Mark          
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+            <a class="dropdown-item" routerLink="/task">Task</a>
+            <a class="dropdown-item" routerLink="/schedule">Schedule</a>
+            <div class="dropdown-divider"></div>          
+          </div>
+        </li> 
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/testing">
+              <i class="fa fa-code">                
+              </i>
+              Testing
+            </a>
+          </li>    
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-warning">11</span>
+          </i>
+          Disabled
+        </a>
+      </li> -->      
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/notification">
+          <i class="fa fa-bell">
+            <span class="badge badge-info">11</span>
+          </i>
+          Notification
+        </a>
+      </li>      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user">            
+          </i>
+          Hello, User          
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" target="_blank"></a>
+          <a class="dropdown-item fa fa-sign-out" href="#">Logout</a>          
+          <div class="dropdown-divider"></div>          
+        </div>
+      </li> 
+    </ul>    
+  </div>  
+</nav>
+ 
+

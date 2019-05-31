@@ -1,0 +1,55 @@
+<section id="team" class="pb-5">
+  
+  <div class="container-fluid">
+      <p-growl [value]="msgs"></p-growl> 
+      <p-confirmDialog></p-confirmDialog>         
+
+      <div class="col-sm-6 mx-auto">
+        <div class="card shadow-lg ">       
+          <div class="card-header">
+              <h2 class="card-title">Create New User</h2>
+          </div>   
+          <div class="card-body">            
+            <form [formGroup]="userForm" class="justify-content-center"  (ngSubmit)="onFormSubmit()" action="/userindex">
+              <div class="form-group row">
+                <div class="col-sm-4" align="right">
+                  <label for="emailuser">Email User <font color="red">*)</font></label>            
+                </div>
+                  <div class="col-sm-6">
+                    <input type="email" class="form-control" id="emailuser" formControlName="email" placeholder="Input email here" required>
+                    <div *ngIf="email.touched && email.invalid" class="alert alert-danger">Email is required</div>
+                    <br>
+                  </div>
+                        
+                
+                <div class="col-sm-4" align="right">
+                  <label for="User Type">User Type 
+                    <font color="red">*)</font></label>
+                </div>
+                
+                <div class="col-sm-6">
+                  <select id="usertype" name="usertype" formControlName="userType" >
+                    <option value="">-- Select User Type --</option>
+                    <option value="MANAGEMENT">Management</option>
+                    <option value="PAYROLL_SPECIALIST">Payroll Specialist</option>
+                    <option value="ADMIN">Admin</option>
+                  </select>
+                </div>
+            
+              </div>  
+              
+              <div class="col-sm-8" align="right">
+                <button type="submit" class="btn btn-primary">Submit</button>   
+                <button type="submit" class="btn btn-primary" routerLink="/user">Cancel</button>                       
+              </div>        
+         </form>           
+          </div>
+        </div>
+      </div>
+
+    
+  </div>
+</section>
+
+
+  

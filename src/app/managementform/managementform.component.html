@@ -1,0 +1,90 @@
+<section id="team" class="pb-5">
+    <div class="container-fluid">
+        <div class="alert alert-danger" role="alert" style="display:none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            data failed to create! please check your input!
+          </div>
+        <div class="alert alert-success" role="alert" style="display:none;"><i class="fa fa-check" aria-hidden="true"></i>
+            data successfully created!
+          </div>
+
+      <div class="col-sm-6 mx-auto">
+          <div class="card shadow-lg ">       
+            <div class="card-header">
+                <h2 class="card-title">Create New Management</h2>
+                <h6>field with  <font color="red">*</font> is required.</h6>
+            </div>   
+            <div class="card-body">            
+                <form [formGroup]="managementForm" class="justify-content-center" (ngSubmit)="onFormSubmit()">      
+                    <div class="form-group row">
+                      
+                      <div class="col-sm-4" align="right">
+                        <label for="kodemanagement">Management Code <font color="red">*)</font></label>            
+                      </div>
+                        
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control" id="kodemanagement" formControlName="kodeManagement" placeholder="Input management code here" required>
+                        <br>
+                      </div>          
+          
+                      <div class="col-sm-4" align="right">
+                          <label for="namamanagement">Management Name <font color="red">*)</font></label>            
+                        </div>                              
+          
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="namamanagement" formControlName="nama" placeholder="Input management name here" required>
+                          <br>
+                        </div>                                
+          
+                        <div class="col-sm-4" align="right">
+                            <label for="address">Address <font color="red">*)</font></label>            
+                        </div>
+                            
+                          <div class="col-sm-6">
+                              <textarea class="form-control" name="" id="" formControlName="alamat" rows="3" placeholder="Input Address here" required></textarea>
+                            <br>
+                          </div>
+                                
+          
+                      <div class="col-sm-4" align="right">
+                          <label for="email">Email <font color="red">*)</font></label>            
+                      </div>
+                          
+                      <div class="col-sm-7 userexist" style="display:block">
+                        <input type="text" name="" id="" class="form-control">
+                        <br><br>
+                      </div>                          
+          
+                    <div class="col-sm-4" align="right">
+                        <label for="telephone">Telephone Number</label>            
+                    </div>
+                        
+                      <div class="col-sm-6">
+                          <input type="number" class="form-control" id="telephone" formControlName="telp" placeholder="Input telephone number here">
+                        <br>
+                      </div>
+
+                      
+                      <div class="col-sm-4" align="right">
+                          <label for="telephone">Status</label>            
+                      </div>  
+                      
+                      <div class="col-sm-2">
+                        <label class="containercheck">
+                            <input type="checkbox" checked="checked" formControlName="aktif"> <h6>Aktif</h6>
+                            <span class="checkmark"></span>
+                        </label>
+                      </div>            
+          
+                    </div>  
+                    
+                    <div class="col-sm-8" align="right">
+                      <button type="submit" class="btn btn-primary">Submit</button>   
+                      <button type="submit" class="btn btn-primary" routerLink="/management">Cancel</button>                       
+                    </div>        
+               </form>              
+            </div>
+          </div>
+        </div>
+
+       
+    </div>   
