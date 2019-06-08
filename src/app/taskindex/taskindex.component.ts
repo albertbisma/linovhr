@@ -8,8 +8,8 @@ import { Message, ConfirmationService } from 'primeng/primeng';
   styleUrls: ['./taskindex.component.css']
 })
 export class TaskindexComponent implements OnInit {
-  tasks;
-  msg:Message[]=[];
+  tasks: any[];
+  msgs:Message[]=[];
   url = 'http://localhost:8080/task';
   constructor(private http: Http, private confirmationService:ConfirmationService) {
     this.getData();
@@ -27,33 +27,37 @@ export class TaskindexComponent implements OnInit {
   }
 
   onDelete(id){
-    this.http.delete(this.url+'/'+id)
-        .subscribe(response => {
-          this.getData();
-          this.popUpMsg();
-        })
+    try{
+      this.http.delete(this.url+"/"+id).subscribe(response => {
+        this.getData();
+        this.popUpMsg();
+      }),
+      error =>{
+        console.log(error);
+      }
+    }catch(e){
+      console.log(e);
+    }
   }
 
 
   confirmDelete(id,kode,nama){
     this.confirmationService.confirm({
-      message: 'Are you sure want to delete this <strong>'+kode+'-'+nama+' </strong>?',
+      message: 'Are you sure want to delete this <strong>'+kode+' ('+nama+') </strong>?',
       header: 'CAUTION!!!'     ,
       icon: 'fas fa-exclamation-triangle',
       accept:()=>{
-        this.onDelete(id);
+        this.onDelete(id);        
       }
     })
   }
 
   popUpMsg(){
-    this.msg = [];
-    this.msg.push(
+    this.msgs = [];
+    this.msgs.push(
       {
-        severity:'success',
-        summary:'SUCCESS',
-        detail:'Congratulation your data successfully removed!'
-      }    
+        severity:'success', summary:'SUCCESS', detail:'Congratulations your data sucessfully removed!'
+      }
     )
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/primeng';
 
   declare var $:any;
 
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class TaskformComponent implements OnInit {
   taskForm: FormGroup;
+  msgs: Message[]=[];
   url = 'http://localhost:8080/task';
   constructor(private http:Http, private formBuilder:FormBuilder, private router:Router) { }
 
@@ -29,10 +31,25 @@ export class TaskformComponent implements OnInit {
   onFormSubmit(){
     let data = this.taskForm.value;
     this.http.post(this.url,data).subscribe(response=>{
-      this.router.navigate(['/task']);      
+      this.showSuccess();
+
+      setTimeout(()=> {
+        this.router.navigate(['/tasktype']);
+      }, 500);           
     },
     error =>{
       console.log(error);
     })
+  }
+
+  showSuccess(){
+    this.msgs=[];
+    this.msgs.push(
+      {
+        severity:'success',
+        summary:'SUCCESS',
+        detail:'Congratulations! Tasktype added successfully'
+      }
+    )
   }
 }

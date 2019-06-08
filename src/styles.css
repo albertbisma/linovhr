@@ -95,4 +95,7 @@ select {
   }
 
 
-  
+  .my-center-text {
+    text-align: center;
+    width: 100%;
+}

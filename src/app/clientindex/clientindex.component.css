@@ -43,3 +43,8 @@ section .section-title {
     pointer-events: none;
     color: #aaa;
 }
+
+#gambarlogo {    
+    max-height: 100px;
+    max-width: 100px;        
+}

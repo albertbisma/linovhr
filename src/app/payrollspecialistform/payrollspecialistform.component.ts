@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Message } from 'primeng/primeng';
+import { Router } from '@angular/router';
 
 declare var $:any;
 
@@ -12,10 +14,11 @@ declare var $:any;
 export class PayrollspecialistformComponent implements OnInit {  
   payrolls: any[];
   payrollForm:FormGroup;
+  msgs: Message[]=[];
   formSubmitted=false;
   url = 'http://localhost:8080/payrollspecialist';
 
-  constructor(private http:Http, private formBuilder:FormBuilder) { 
+  constructor(private router:Router,private http:Http, private formBuilder:FormBuilder) { 
     this.http.get('http://localhost:8080/user').
     subscribe( response =>{
       console.log(response.json());
@@ -57,6 +60,10 @@ export class PayrollspecialistformComponent implements OnInit {
     let data = this.payrollForm.value;
     this.http.post(this.url, data).subscribe(
       response => {
+        this.showSuccess();
+        setTimeout(()=>{
+          this.router.navigate(['/payroll']);
+        },500);
         console.log(data);
         console.log(response);
       },
@@ -65,6 +72,17 @@ export class PayrollspecialistformComponent implements OnInit {
       })
   }
 
+
+  showSuccess(){
+    this.msgs=[];
+    this.msgs.push(
+      {
+        severity:'success',
+        summary:'SUCCESS',
+        detail:'Congratulations! Payroll specialist added successfully'
+      }
+    )
+  }
   
 
 }

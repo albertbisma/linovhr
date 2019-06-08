@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ConfirmationService, Message } from 'primeng/primeng';
+// import { User } from '../inputuser/User';
+
 
 
 @Component({
@@ -10,14 +12,16 @@ import { ConfirmationService, Message } from 'primeng/primeng';
 })
 export class UserindexComponent implements OnInit {
   users: any[];
-  msgs:Message[]=[];
+  msgs:Message[]=[];  
+  
+
   url = 'http://localhost:8080/user';
 
-  constructor(private http: Http, private confirmationService:ConfirmationService) {    
-    this.getData();
+  constructor(private http: Http, private confirmationService:ConfirmationService) {        
   }
 
   ngOnInit() {
+    this.getData();   
   }
 
   getData(){
@@ -29,6 +33,7 @@ export class UserindexComponent implements OnInit {
     });
   }
   
+  
   onDelete(id){    
     try{      
       this.http.delete(this.url+'/'+id)
@@ -37,6 +42,8 @@ export class UserindexComponent implements OnInit {
             this.popUpMsg();       
           })
     }catch(e){
+      console.log("INI ID!");
+      console.log(id);
       console.log(e);
     }       
   }

@@ -1,17 +1,14 @@
 <section id="team" class="pb-5">
   
-    <div class="container-fluid">
-
-        <div class="alert alert-danger" role="alert" style="display:none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          data failed to create! please check your input!
-        </div>
-      <div class="alert alert-success" role="alert" style="display:none;"><i class="fa fa-check" aria-hidden="true"></i>
-          data successfully created!
-        </div>        
-
+    <div class="container-fluid">        
       <!-- MODAL -->      
       
       <!-- Modal -->
+
+      <p-growl [value]="msgs"></p-growl>
+    
+      <p-confirmDialog></p-confirmDialog>
+      
       <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -25,17 +22,9 @@
               <div class="container-fluid align-content-center">                              
                 
                 <form [formGroup]="formDtl" (ngSubmit)="onFormSubmitDtl()">                  
-
+                   
                     <div>
-                      <label for="kodetaskhdr">Task Code </label>
-                    </div>
-
-                    <div>
-                      <input type="text" class="form-control" name="kodetaskhdr" id="txttkodetask" value="T-001" disabled>                                                    
-                    </div>  
-                    
-                    <div>
-                      <label for="kodetaskhdr">Task Name </label>
+                      <label for="user">Task Name </label>
                     </div>
 
                     <div formGroupName="task">
@@ -109,7 +98,7 @@
         </div>
   
         <div class="col-sm-2">
-          <input type="text" formControName="kodeTask" class="form-control" id="taskcode">
+          <input type="text" formControlName="kodeTask" class="form-control" id="taskcode">
           <br>
         </div>
            
@@ -118,26 +107,52 @@
           <label for="User Type">Payroll Specialist Name</label>
         </div>
   
-        <div class="col-sm-2" formGroupName="payrollSpecialist">
-          <input type="text" fromControlName="idPs" class="form-control" id="payrollname" disabled value="Amanda">
+        <div formGroupName="payrollSpecialist" class="col-sm-2">
+          <select formControlName="idPs" id="month" name="month">
+            <option value="">-- Select Payroll --</option>                      
+            <option *ngFor="let ps of listps" value="{{ps.idPs}}">{{ps.nama}}</option>
+          </select>              
           <br>
         </div>
         
 
         <div class="col-sm-1" align="right">
             <label for="taskcode">Period</label>            
-          </div>           
-                          
-            <div class="col-sm-2" style="display:block">
-              <input type="text" id="datepicker" />
-              </div>   
+        </div>                                               
+          
+        <div class="col-sm-2">
+            <select formControlName="bulan" id="month" name="month">
+              <option value="">-- Select Month --</option>                      
+              <option *ngFor="let enum of listenum" value="{{enum}}">{{enum}}</option>
+            </select>              
+
+            <select formControlName="tahun" id="year" name="year">
+                <option value="">-- Select Year --</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2020">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+              </select>              
+            <br>
+        </div>
+
               <div class="col-sm-7" align="right">
                   <label for="taskcode">Client</label>            
                 </div>           
                                 
-                  <div class="col-sm-2" style="display:block">
-                    <select id="month" name="month">
-                      <option value="">-- Select Client --</option>                      
+                  <div formGroupName="client" class="col-sm-2" style="display:block">
+                    <select formControlName="idClient" id="client" name="client">
+                      <option value="">-- Select Client --</option>
+                      <option *ngFor="let client of clients" value="{{client.idClient}}">{{client.nama}}</option>
                     </select>              
                   </div>        
 
@@ -182,7 +197,7 @@
                           <td style="text-align:center">
                             <button type="button" class="btn btn-success btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-check"></i></button>
                             <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-pencil"></i></button>
-                            <button type="button" (click)="onDelete(i)" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
+                            <button type="button" (click)="confirmDelete(i, taskDtl.keterangan)" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
                           </td>
                         </tr>           
                                                  

@@ -15,6 +15,7 @@ export class InputuserComponent implements OnInit {
   formSubmitted=false;  
   url = 'http://localhost:8080/user';
   msgs:Message[]=[];
+  email1: string;
 
   constructor(private formBuilder:FormBuilder, private http:Http, private router:Router) {
     this.http.get('http://localhost:8080/user').subscribe(response =>{

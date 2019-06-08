@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/primeng';
 
 @Component({
   selector: 'app-managementform',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class ManagementformComponent implements OnInit {
   url = 'http://localhost:8080/management';
   users;
+  msgs:Message[]=[];
   managementForm: FormGroup;
   
   constructor(private formBuilder:FormBuilder, private http:Http, private router: Router) { 
@@ -35,13 +37,37 @@ export class ManagementformComponent implements OnInit {
       aktif: ['', Validators.required]
     })
   }
+
+  get nama(){
+    return this.managementForm.get('nama');
+  }
   
   onFormSubmit(){
     let data = this.managementForm.value;
 
     this.http.post(this.url,data)
         .subscribe( response => {
-          this.router.navigate(['/managementindex']);
-        })
+          this.showSuccess();
+          setTimeout(()=>{
+            this.router.navigate(['/management']);
+          }, 500);         
+        },
+        error =>{
+          console.log(error);
+        }
+        )
+  }
+
+  showSuccess(){
+    this.msgs=[];
+    this.msgs.push(
+      {
+        severity:'success',
+        summary:'SUCCESS',
+        detail:'Congratulations! Management added successfully'
+      }
+    )
   }
 }
+
+

@@ -51,7 +51,7 @@ export class ClientformComponent implements OnInit {
       console.log(JSON.stringify(this.clientForm.value));          
       setTimeout(()=> {
         this.router.navigate(['/client']);
-      }, 2000);        
+      }, 500);        
     },
     error =>{
       this.showFail();
@@ -92,9 +92,8 @@ export class ClientformComponent implements OnInit {
 
     console.log(input);
     return input;
-  }
+  }      
 
-  
     // onUpload(){
     // const formModel = this.prepareUpload();
     // const ind = new FormData();

@@ -9,9 +9,103 @@
           <div class="form-group has-search float-right">
               <span class="fa fa-search form-control-feedback"></span>
               <input type="text" class="form-control col-sm-12" placeholder="Search">
-            </div>
+          </div>
+
+
+          <div class="table-inverse">
+            <table class="table">              
+              <p-dataTable [value]="tasks" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20,50]" [globalFilter]="gb" expandableRows="true">                      
+                <p-headerColumnGroup>  
+                  <p-row>
+                    <p-column header="#" rowspan="2" [style]="{'width':'2%'}"></p-column>
+                    <p-column header="Number" [style]="{'width':'3%'}" rowspan="2"></p-column>                                 
+                      <!-- <p-column field="idUser" header="User"></p-column> -->                  
+                      <p-column header="Task Code" [style]="{'width':'6%'}" rowspan="2"></p-column>                  
+                      <p-column header="Period" colspan="2" [style]="{'width':'15%'}"></p-column>                    
+                      <p-column header="Client Name" [style]="{'width':'10%'}" rowspan="2"></p-column>
+                  </p-row>
+                  <p-row>
+                      <p-column header="Month" [style]="{'width':'6%'}"></p-column>
+                      <p-column header="Year" [style]="{'width':'6%'}"></p-column>                      
+                  </p-row>                   
+                  </p-headerColumnGroup>                  
+                    <p-column expander="true"  styleClass="col-icon" (click)="getDataDtlbyHdr([hdrCreateTask.idHdr])"></p-column>                  
+                    <p-column header="Number">
+                  <ng-template let-i="rowIndex" pTemplate="body">
+                    {{i+1}}  
+                  </ng-template>
+                    </p-column>
+                    <p-column field="kodeTask"></p-column>
+                    <p-column field="bulan"></p-column>
+                    <p-column field="tahun"></p-column>
+                    <p-column field="client.nama"></p-column>
+                    <!-- <p-column header="Action" [style]="{'width':'25%'}">
+
+                      <ng-template let-nt="rowData" pTemplate>
+                        <div class="my-center-text">
+                          <button type="button" class="btn btn-warning btn-circle btn-lg"><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/userform"><i class="fa fa-pencil"></i></button>
+                          <button type="submit" (click)="confirmDelete(nt.idHdr, nt.kodeTask)" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
+                        </div>
+                      </ng-template>
+                    </p-column> -->
+                    
+
+                  <ng-template let-dtl pTemplate="rowexpansion">
+                    <p-dataTable [value]="dtls" [globalFilter]="gb" expandableRows="true">                      
+                      <p-header>List Detail of Task <br><strong>{{dtl.idHdr}} {{dtl.kodeTask}} - {{dtl.client.nama}} ( {{dtl.bulan}}/{{dtl.tahun}} )</strong> </p-header>                      
+                      <p-column header="Number" [style]="{'width}}':'5%'}" >
+                          <ng-template let-i="rowIndex" pTemplate="body">
+                            {{i+1}}  
+                          </ng-template>
+                      </p-column>
+                      <p-column field="task.jenisTask" header="Task Type" [style]="{'width':'15%'}"></p-column>
+                      <p-column field="tglAwal" header="Start Date" [style]="{'width':'15%'}"></p-column>
+                      <p-column field="tglAkhir" header="Finish Date" [style]="{'width':'15%'}"></p-column>
+                      <p-column field="keterangan" header="Description" [style]="{'width':'15%'}"></p-column>
+                      <p-column header="Action" [style]="{'width':'15%'}">
+                          <ng-template let-dtlaction="rowData" pTemplate>
+                            <div class="my-center-text">
+                              <button type="button" class="btn btn-success btn-circle btn-lg btn3d"><i class="fa fa-check"></i></button>
+                              <button type="button" class="btn btn-primary btn-circle btn-lg btn3d" routerLink="/userform"><i class="fa fa-pencil"></i></button>
+                              <button type="submit" (click)="confirmDelete(nt.idHdr, nt.kodeTask)" class="btn btn-danger btn-circle btn-lg btn3d"><i class="fa fa-trash"></i></button>
+                            </div>
+                          </ng-template>
+                        </p-column>
+                    </p-dataTable>
+                    <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-3" style="text-align:center">
+                                <i class="fa fa-search" (click)="showCar(car)" style="cursor:pointer;float:left;margin-top:40px"></i>                                
+                            </div>
+                            <div class="ui-grid-col-9">
+                                <div class="ui-grid ui-grid-responsive ui-grid-pad">
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-2 label">Vin: </div>
+                                        <div class="ui-grid-col-10">{{car.vin}}</div>
+                                    </div>
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-2 label">Year: </div>
+                                        <div class="ui-grid-col-10">{{car.year}}</div>
+                                    </div>
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-2 label">Brand: </div>
+                                        <div class="ui-grid-col-10">{{car.brand}}</div>
+                                    </div>
+                                    <div class="ui-grid-row">
+                                        <div class="ui-grid-col-2 label">Color: </div>
+                                        <div class="ui-grid-col-10">{{car.color}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </ng-template>
+              </p-dataTable>
+          </table>
+          </div>
  
-          <div class="table-responsive table-inverse">
+          <!-- <div class="table-responsive table-inverse">
           <table class="table">
               <thead class="thead-light">
                 <tr>
@@ -26,11 +120,12 @@
               <tbody>
                 <tr *ngFor="let task of tasks; let i=index">
                   <td>{{i+1}}</td>                                       
-                  <td>{{task.hdrCreateTask.kodeTask}}</td>
-                  <td>{{task.hdrCreateTask.bulan}}</td>
-                  <td>{{task.hdrCreateTask.tahun}}</td>
-                  <td>{{task.hdrCreateTask.client.nama}}</td>
+                  <td>{{task.kodeTask}}</td>
+                  <td>{{task.bulan}}</td>
+                  <td>{{task.tahun}}</td>
+                  <td>{{task.client.nama}}</td>
                   <td style="text-align:center">
+                      <button type="button" class="btn btn-warning btn-circle btn-lg" routerLink="/task/form"><i class="fa fa-eye"></i></button>
                     <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/task/form"><i class="fa fa-pencil"></i></button>
                     <button type="button" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
                   </td>
@@ -55,5 +150,5 @@
                   </li>
                 </ul>
               </nav>
-          </div>               
+          </div>                -->
   </div>

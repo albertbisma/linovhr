@@ -4,10 +4,9 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 
-import { ScheduleModule,SidebarModule } from 'primeng/primeng';
-import { ProgressSpinnerModule } from 'primeng/primeng';
-import { GrowlModule,ConfirmDialogModule,ConfirmationService } from 'primeng/primeng';
+import { InputMaskModule,CheckboxModule,InputTextModule,DataTableModule,SharedModule,ProgressSpinnerModule,GrowlModule,ConfirmDialogModule,ConfirmationService,ScheduleModule,SidebarModule } from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 import { AppComponent } from './app.component';
@@ -70,7 +69,12 @@ import { NewtaskformComponent } from './newtaskform/newtaskform.component';
      ProgressSpinnerModule,    
      ConfirmDialogModule,
      GrowlModule,
-     BrowserAnimationsModule,    
+     InputTextModule,
+     BrowserAnimationsModule,   
+     DataTableModule,
+     CheckboxModule,
+     InputMaskModule,
+     SharedModule,
      RouterModule.forRoot([      
        {
         path : '',

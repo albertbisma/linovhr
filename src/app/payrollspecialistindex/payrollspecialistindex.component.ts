@@ -8,7 +8,7 @@ import { Message, ConfirmationService } from 'primeng/primeng';
   styleUrls: ['./payrollspecialistindex.component.css']
 })
 export class PayrollspecialistindexComponent implements OnInit {
-  payrolls;    
+  payrolls: any[];    
   url = 'http://localhost:8080/payrollspecialist';
   msgs:Message[]=[];
   constructor(private http:Http, private confirmationService:ConfirmationService) {    

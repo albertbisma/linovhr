@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ConfirmationService, Message } from 'primeng/primeng';
+import { Management } from '../managementindex/management'
 
 @Component({
   selector: 'app-managementindex',
@@ -8,15 +9,22 @@ import { ConfirmationService, Message } from 'primeng/primeng';
   styleUrls: ['./managementindex.component.css']
 })
 export class ManagementindexComponent implements OnInit {
-  managements;
+  managements: any[];
   msgs: Message[] = [];
+  cols:any[];
+  stacked: boolean;
   url ='http://localhost:8080/management';
+  datamanagement:Management[];
 
-  constructor(private http: Http, private confirmationService:ConfirmationService) {    
-    this.getData();
+  constructor(private http: Http, private confirmationService:ConfirmationService) {        
    }
 
   ngOnInit() {
+    this.getData();      
+  }
+
+  toggle() {
+    this.stacked = !this.stacked;
   }
 
   getData(){

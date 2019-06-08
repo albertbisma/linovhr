@@ -15,8 +15,20 @@
 
 <!-- <h3>Basic</h3>
 <p-progressSpinner></p-progressSpinner> -->
-<p-growl [value]="msgs"></p-growl>
+<!-- <p-growl [value]="msgs"></p-growl>
     
 <p-confirmDialog></p-confirmDialog>
 
-<button type="text" class="btn btn-danger" (click)="confirm()" pButton label="Confirm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+<button type="text" class="btn btn-danger" (click)="confirm()" pButton label="Confirm"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+
+
+<h3>Basic</h3>
+<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+  <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+</div>
+<p-dataTable sortMode="multiple" [value]="users" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[1,10,20]" [globalFilter]="gb">    
+    <p-column field="index" header="No"></p-column>
+    <p-column field="email" header="Email" [sortable]="true"></p-column>
+    <p-column field="userType" header="User Type" [sortable]="true"></p-column>
+</p-dataTable>

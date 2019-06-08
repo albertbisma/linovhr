@@ -3,18 +3,53 @@
         <p-growl [value]="msgs"></p-growl>
     
         <p-confirmDialog></p-confirmDialog>
-      <h1>List Payroll Specialist</h1>
-      <br><br><br><br><br><br><br><br>
+      <h1>List Payroll Specialist</h1>      
             <div class="float-left" >
                 <button type="submit" class="btn btn-primary" routerLink="/payroll/form">Create New Payroll Specialist</button>                        
             </div>          
   
-            <div class="form-group has-search float-right">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control col-sm-12" placeholder="Search">
-              </div>
+            <div class="form-group has-search float-right">                
+                <span class="ui-float-label ">
+                    <input #gb id="float-input" type="text" size="30" pInputText> 
+                    <label for="float-input" class="fa fa-search">Search</label>
+                </span>
+              </div>              
    
-            <div class="table-responsive table-inverse">
+            <div class="table-inverse">
+                <table class="table">              
+              <p-dataTable sortMode="multiple" [value]="payrolls" [rows]="10" [responsive]="true" [paginator]="true" [stacked]="stacked" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20,50]" [globalFilter]="gb">                      
+                  <p-column header="Number" [style]="{'width':'5%'}">
+                      <ng-template let-i="rowIndex" pTemplate="body">
+                        {{i+1}}  
+                      </ng-template>
+                  </p-column>
+                  <!-- <p-column field="idManagement" header="Management"></p-column> -->
+                  <p-column field="kodePs" header="Payroll Specialist Code" [sortable]="true"></p-column>
+                  <p-column field="nama" header="Payroll Specialist Name" [sortable]="true"></p-column>
+                  <p-column field="alamat" header="Address" [sortable]="true" [style]="{'width':'10%'}"></p-column>
+                  <p-column field="user.email" header="E-mail" [sortable]="true"></p-column>
+                  <p-column field="telp" header="Telephone Number" [sortable]="true"></p-column>
+                  <p-column field="aktif" header="Status" [sortable]="true">
+                      <ng-template let-col let-car="rowData" pTemplate="body">
+                        <div class="my-center-text">
+                          <input type="checkbox" [disabled]="true" [checked]="car.aktif"/> Aktif
+                        </div>
+                      </ng-template>
+                  </p-column>
+                  <p-column field="" header="Action">
+
+                    <ng-template let-mg="rowData" pTemplate>
+                      <div class="my-center-text">
+                        <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/userform"><i class="fa fa-pencil"></i></button>
+                        <button type="submit" (click)="confirmDelete(mg.idPs, mg.kodePs)" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </ng-template>
+                  </p-column>
+              </p-dataTable>
+              </table>
+            </div>
+
+            <!-- <div class="table-responsive table-inverse">
             <table class="table">
                 <thead class="thead-light">
                   <tr>
@@ -67,5 +102,5 @@
                     </li>
                   </ul>
                 </nav>
-            </div>            
+            </div>             -->
     </div>
