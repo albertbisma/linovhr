@@ -1,13 +1,6 @@
+<app-topnav></app-topnav> 
 <section id="team" class="pb-5">
   <div class="container-fluid">
-
-    <div class="alert alert-danger" role="alert" style="display:none;"><i class="fa fa-exclamation-triangle"
-        aria-hidden="true"></i>
-      data failed to create! please check your input!
-    </div>
-    <div class="alert alert-success" role="alert" style="display:none;"><i class="fa fa-check" aria-hidden="true"></i>
-      data successfully created!
-    </div>
 
     <h1>Report By Payroll Specialist</h1>
     <form [formGroup]='rptPSForm' class="justify-content-center" (ngSubmit)='onFormSubmit()'>
@@ -17,7 +10,7 @@
         </div>
 
         <div class="col-sm-4">
-          <select id="usertype" name="month" formControlName="bulan">
+          <select id="month" name="month" formControlName="bulan">
             <option value="" disabled="true">-- Select Month Here --</option>
             <option value="JANUARI">January</option>
             <option value="FEBRUARI">February</option>
@@ -55,11 +48,13 @@
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
-
-
     </form>
 
     <!--------------------------------------------------------->
+    <div *ngIf="reports">
+      <h4 class="font-weight-bold">Period : {{month}} {{year}} </h4>
+      <button id="btn-download" role="button" class="btn btn-primary" (click)="downloadPDF()"><span *ngIf="downloadText === 'Downloading'" class="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"></span>{{ downloadText }}</button>
+    </div>
     <div class="accordion" id="accordionExample">
       <div class="card" *ngFor="let report of reports; index as i; first as isFirst; last as isLast">
         <button [id]="'ps-' + i"
@@ -90,7 +85,7 @@
                 <td>{{ps[i].taskTotal}}</td>
               </tr>
               <tr>
-                <td>Jumlah Task Terselesaikan</td>
+                <td>Jumlah Task Selesai</td>
                 <td>:</td>
                 <td>{{ps[i].taskDone}}</td>
               </tr>
@@ -119,9 +114,9 @@
                     <td class=text-center>{{i === 0 ? client.namaClient : ''}}</td>
                     <td class=text-center>{{task.jenisTask}}</td>
                     <td class=text-center>{{task.tglAwal | slice:-2}} - {{task.tglAkhir | slice:-2}}</td>
-                    <td class=text-center>{{task.tglSelesai | slice:-2}}</td>
+                    <td class=text-center>{{task.tglSelesai === null ? "-" : task.tglSelesai | slice:-2}}</td>
                     <td class=text-center>{{task.keterangan}}</td>
-                    <td class=text-center>{{task.status}}</td>
+                    <td [class]="task.status === 'PENDING' ? 'text-danger text-center' : task.status === 'RESOLVED' ? 'text-warning text-center' : 'text-primary text-center'">{{task.status}}</td>
                   </tr>
                 </tbody>
               </table>

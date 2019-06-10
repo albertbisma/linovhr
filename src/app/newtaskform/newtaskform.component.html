@@ -1,3 +1,4 @@
+<app-topnav></app-topnav> 
 <section id="team" class="pb-5">
   
     <div class="container-fluid">        
@@ -29,7 +30,7 @@
 
                     <div formGroupName="task">
                         <select name="user" formControlName="idTask">
-                            <option value="">-- Select Email User --</option>
+                            <option value="">-- Select Task Type --</option>
                             <option *ngFor="let tasktype of tasktypes" value="{{tasktype.idTask}}">{{tasktype.jenisTask}}</option>                             
                           </select>
                     </div>

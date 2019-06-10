@@ -1,3 +1,4 @@
+<app-topnav></app-topnav> 
 <section id="team" class="pb-5">
   <div class="container-fluid">
     <h1>List Task</h1>
@@ -14,7 +15,7 @@
 
           <div class="table-inverse">
             <table class="table">              
-              <p-dataTable [value]="tasks" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20,50]" [globalFilter]="gb" expandableRows="true">                      
+              <p-dataTable [value]="tasks" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20,50]" [globalFilter]="gb" expandableRows="true" #dt (onRowClick)="dt.getDataDtlbyHdr(idHdr)"> 
                 <p-headerColumnGroup>  
                   <p-row>
                     <p-column header="#" rowspan="2" [style]="{'width':'2%'}"></p-column>
@@ -29,7 +30,7 @@
                       <p-column header="Year" [style]="{'width':'6%'}"></p-column>                      
                   </p-row>                   
                   </p-headerColumnGroup>                  
-                    <p-column expander="true"  styleClass="col-icon" (click)="getDataDtlbyHdr([hdrCreateTask.idHdr])"></p-column>                  
+                    <p-column expander="true"  styleClass="col-icon"></p-column>                  
                     <p-column header="Number">
                   <ng-template let-i="rowIndex" pTemplate="body">
                     {{i+1}}  
@@ -52,7 +53,7 @@
                     
 
                   <ng-template let-dtl pTemplate="rowexpansion">
-                    <p-dataTable [value]="dtls" [globalFilter]="gb" expandableRows="true">                      
+                    <p-dataTable [value]="dtls" [globalFilter]="gb" expandableRows="true" >                      
                       <p-header>List Detail of Task <br><strong>{{dtl.idHdr}} {{dtl.kodeTask}} - {{dtl.client.nama}} ( {{dtl.bulan}}/{{dtl.tahun}} )</strong> </p-header>                      
                       <p-column header="Number" [style]="{'width}}':'5%'}" >
                           <ng-template let-i="rowIndex" pTemplate="body">

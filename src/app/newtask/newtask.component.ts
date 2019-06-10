@@ -15,7 +15,7 @@ export class NewtaskComponent implements OnInit {
 
   ngOnInit() {
     this.getData();    
-    this.getDataDtlbyHdr();
+    // this.getDataDtlbyHdr();
   }
 
   getData(){
@@ -26,8 +26,8 @@ export class NewtaskComponent implements OnInit {
         })
   }
 
-  getDataDtlbyHdr(){
-    this.http.get('http://localhost:8080/taskschedule/dtl/id-hdr/00d67cba-0bfc-4674-ae49-ac04985c5f29')
+  getDataDtlbyHdr(id){
+    this.http.get('http://localhost:8080/taskschedule/dtl/id-hdr/'+id)
         .subscribe(response=>{          
           console.log(response);
           this.dtls = response.json();

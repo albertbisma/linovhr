@@ -32,6 +32,7 @@ import { TaskformComponent } from './taskform/taskform.component';
 import { TestingComponent } from './testing/testing.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 import { NewtaskformComponent } from './newtaskform/newtaskform.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [    
@@ -57,7 +58,7 @@ import { NewtaskformComponent } from './newtaskform/newtaskform.component';
     TaskformComponent,
     TestingComponent,
     NewtaskComponent,  
-    NewtaskformComponent    
+    NewtaskformComponent, LoginComponent    
   ],
   imports: [
      BrowserModule,
@@ -78,8 +79,9 @@ import { NewtaskformComponent } from './newtaskform/newtaskform.component';
      RouterModule.forRoot([      
        {
         path : '',
-        component: IndexComponent
+        component: LoginComponent//IndexComponent
        },
+       
        {
         path : 'testing',
         component: TestingComponent,

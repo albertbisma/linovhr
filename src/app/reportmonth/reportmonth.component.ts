@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Http } from "@angular/http";
+import { Http, ResponseContentType } from "@angular/http";
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: "app-reportmonth",
@@ -15,9 +16,15 @@ export class ReportmonthComponent implements OnInit {
     taskDone: number;
     taskPending: number;
   }[] = [];
+  bulanValue: string;
+  month: string;
+  year: string;
   years = [];
 
+  downloadText = 'Download Report';
+
   url = "http://localhost:8080/report/payroll/";
+  jasperUrl = "http://localhost:8080/jasper/ps/";
 
   constructor(private formBuilder: FormBuilder, private http: Http) {}
 
@@ -38,7 +45,6 @@ export class ReportmonthComponent implements OnInit {
     this.http
       .get(
         this.url +
-          "/" +
           this.rptPSForm.get("bulan").value +
           "/" +
           this.rptPSForm.get("tahun").value
@@ -60,6 +66,29 @@ export class ReportmonthComponent implements OnInit {
           });
           this.ps.push(pss);
         });
+        let sel = <HTMLSelectElement>document.getElementById('month');
+        this.month = sel.options[sel.selectedIndex].text;
+        this.bulanValue = (<HTMLSelectElement>document.getElementById("month")).value;
+        this.year = (<HTMLSelectElement>document.getElementById("year")).value;
+      },
+      error => {
+        console.log(error);
+      }
+      )
+  }
+
+  downloadPDF() {
+    let element = <HTMLInputElement> document.getElementById("btn-download");
+    element.disabled = true;
+    this.downloadText = 'Downloading';
+      this.http.get(this.jasperUrl + this.bulanValue + "/" + this.year, {responseType: ResponseContentType.Blob}).subscribe(r => {
+        element.disabled = false;
+      this.downloadText = 'Download Report';
+        let data: any = r.blob();
+        console.log(data);
+        var blob = new Blob([data], {type: 'application/pdf'});
+        console.log(blob);
+        FileSaver.saveAs(blob, "employeeReport.pdf");
       });
   }
 
