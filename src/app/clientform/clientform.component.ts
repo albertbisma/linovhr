@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import {MessageService} from 'primeng/components/common/messageservice';
 import { Message } from 'primeng/primeng';
+import { Observable, Observer } from 'rxjs';
 
 declare var $:any;
 
@@ -21,7 +21,7 @@ export class ClientformComponent implements OnInit {
   resplogo:any;
   selectedFile:File = null;
   url = 'http://localhost:8080/client';
-  msgs: Message[]=[];
+  msgs: Message[]=[];  
   
   constructor(private router:Router, private http:Http, private formBuilder: FormBuilder, private route:Router, private lastURI:ActivatedRoute){
     this.lastURI.params.subscribe(param => this.idClient = param.id );
@@ -47,33 +47,62 @@ export class ClientformComponent implements OnInit {
 
   createClientForm(){
     this.clientForm = this.formBuilder.group({
-    
+        idClient:['',Validators.required],
         kodeClient: ['',Validators.required],
         nama:['', Validators.required],
         aktif:['',Validators.required]
     })
   }
  
-  onFormSubmit(){
-    const formModel = this.prepareUpload();
+  onFormSubmit(){    
+    let data = this.clientForm.value;    
 
-    let json = formModel;
-    console.log(json);
-
-    this.http.post(this.url,json).subscribe(response=>{
-      console.log(response);
-      this.showSuccess();  
-
-      console.log(JSON.stringify(this.clientForm.value));          
-      setTimeout(()=> {
-        this.router.navigate(['/client']);
-      }, 500);        
-    },
-    error =>{
-      this.showFail();
+    if(this.idClient !== undefined){
+      if(this.selectedFile !== null){        
+        this.http.put(this.url,data).subscribe(response =>{
+          this.upLogo(this.idClient);
+          this.showSuccessUpdate();
+          setTimeout(()=> {
+            this.router.navigate(['/client']);
+          }, 500);           
+        })        
+      }else{
+        this.http.put(this.url,data).subscribe(response => {
+          this.showSuccessUpdate();
+          setTimeout(()=> {
+            this.router.navigate(['/client']);
+          }, 500);   
+        })
+      }      
+    }else{
+      const formModel = this.prepareUpload();    
+      let json = formModel;
+      this.http.post(this.url,json).subscribe(response=>{
+        console.log(response);
+        this.showSuccess();  
+  
+        console.log(JSON.stringify(this.clientForm.value));          
+        setTimeout(()=> {
+          this.router.navigate(['/client']);
+        }, 500);
+      },
+      error =>{
+        this.showFail();
+      })        
+      }
     }
-    )        
-    } 
+
+
+    upLogo(id){
+      let input = new FormData();
+      input.append('logo', this.selectedFile, this.selectedFile.name);            
+
+      this.http.put('http://localhost:8080/logo/'+id,input)
+          .subscribe(response =>{   
+          console.log(response);               
+      })
+    }
+   
 
     showSuccess(){
       this.msgs = [];
@@ -115,6 +144,28 @@ export class ClientformComponent implements OnInit {
     console.log(input);
     return input;
   } 
+
+  showSuccessUpdate(){
+    this.msgs=[];
+    this.msgs.push(
+      {
+        severity:'success',
+        summary:'SUCCESS',
+        detail:'Data Client berhasil diperbarui!'
+      }
+    )
+  } 
+
+  showError(msg){
+    this.msgs=[];
+    this.msgs.push(
+      {
+        severity:'error',
+        summary:'ERROR!!',
+        detail:msg
+      }
+    )
+  } 
   
   
   loadData(id){
@@ -136,9 +187,7 @@ export class ClientformComponent implements OnInit {
           console.log(this.gambar);
           
         })
-
-  }
-
+  } 
     // onUpload(){
     // const formModel = this.prepareUpload();
     // const ind = new FormData();

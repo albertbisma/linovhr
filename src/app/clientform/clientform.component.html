@@ -10,7 +10,7 @@
               <h2 class="card-title" id="updateclient" >Update Client</h2>
               <h6>field with  <font color="red">*</font> is required.</h6>
           </div>   
-          <div class="card-body">            
+          <div class="card-body">                        
               <form [formGroup]="clientForm" class="justify-content-center" (ngSubmit) ="onFormSubmit()">      
                   <div class="form-group row">                    
                       <div class="col-sm-4" align="right">
@@ -26,6 +26,7 @@
                       <label for="clientname">Client Name <font color="red">*)</font></label>            
                     </div>
                       <div class="col-sm-6">
+                        <input type="clientname" class="form-control" id="clientname" formControlName="idClient" hidden>
                         <input type="clientname" class="form-control" id="clientname" placeholder="Input client name here" formControlName="nama" required>
                         <br>
                       </div>
@@ -62,7 +63,7 @@
                   </div>  
                   
                   <div class="col-sm-8" align="right">
-                    <button type="submit" (click)="onUpload()" class="btn btn-primary">Submit</button>   
+                    <button type="submit" class="btn btn-primary">Submit</button>   
                     <button type="submit" class="btn btn-primary" routerLink="/client">Cancel</button>                       
                   </div>        
              </form>           
