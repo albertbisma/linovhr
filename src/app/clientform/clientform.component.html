@@ -6,7 +6,8 @@
     <div class="col-sm-6 mx-auto">
         <div class="card shadow-lg ">       
           <div class="card-header">
-              <h2 class="card-title">Create New Client</h2>
+              <h2 class="card-title" id="createnewclient" >Create New Client</h2>
+              <h2 class="card-title" id="updateclient" >Update Client</h2>
               <h6>field with  <font color="red">*</font> is required.</h6>
           </div>   
           <div class="card-body">            
@@ -27,18 +28,25 @@
                       <div class="col-sm-6">
                         <input type="clientname" class="form-control" id="clientname" placeholder="Input client name here" formControlName="nama" required>
                         <br>
-                      </div>                                                 
+                      </div>
+                      
+                      <div class="col-sm-4" align="right">                          
+                      </div>
+    
+                      <div class="col-sm-6">
+                          <img id="blah" [src]="imageSrc ? imageSrc : gambar ? 'data:image/png;base64,' + gambar : ''" style="max-width: 100px; max-height: 100px; "/>
+                      </div>
                                           
                       <div class="col-sm-4" align="right">
                         <label for="clientname">Logo Client <font color="red">*)</font></label>            
-                      </div>
-          
+                      </div>                     
+        
                       <div class="col-sm-6">
                         <div class="custom-file">
-                          <input type="file" (change)="onFileSelected($event)" fileInput class="custom-file-input" id="customFile">
-                          <label class="custom-file-label" for="customFile">Choose file</label>
+                          <input type="file" (change)="onFileSelected($event)" #fileInput class="custom-file-input" id="customFile">
+                          <label class="custom-file-label" for="customFile">Choose file</label>                          
                         </div><br><br>
-                      </div>                                
+                      </div>                                                                             
           
                       <div class="col-sm-4" align="right">
                         <label for="status">Status</label>            

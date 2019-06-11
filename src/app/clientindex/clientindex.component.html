@@ -44,7 +44,7 @@
 
                   <ng-template let-c="rowData" pTemplate>
                     <div class="my-center-text">
-                      <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/userform"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/client/form/{{c.client.idClient}}"><i class="fa fa-pencil"></i></button>
                       <button type="submit" (click)="confirmDelete(c.client.idClient, c.client.nama)" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
                     </div>
                   </ng-template>

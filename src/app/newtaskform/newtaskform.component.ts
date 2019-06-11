@@ -49,7 +49,7 @@ export class NewtaskformComponent implements OnInit {
   createFormDtl(){
     this.formDtl = this.formBuilder.group({      
       task: this.formBuilder.group({
-        idTask:['', Validators.required]        
+        idTxask:['', Validators.required]        
       }),
       tglAwal:['', Validators.required],
       tglAkhir:['', Validators.required],

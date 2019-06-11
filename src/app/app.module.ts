@@ -80,8 +80,7 @@ import { LoginComponent } from './login/login.component';
        {
         path : '',
         component: LoginComponent//IndexComponent
-       },
-       
+       },       
        {
         path : 'testing',
         component: TestingComponent,
@@ -95,6 +94,10 @@ import { LoginComponent } from './login/login.component';
         component: ClientformComponent
        },
        {
+        path : 'client/form/:id',
+        component: ClientformComponent
+       },
+       {
         path : 'payroll',
         component: PayrollspecialistindexComponent
        },
@@ -103,7 +106,15 @@ import { LoginComponent } from './login/login.component';
         component: PayrollspecialistformComponent
        },
        {
+        path : 'payroll/form/:id',
+        component: PayrollspecialistformComponent
+       },
+       {
         path : 'management/form',
+        component: ManagementformComponent
+       },
+       {
+        path : 'management/form/:id',
         component: ManagementformComponent
        },
        {
@@ -116,6 +127,10 @@ import { LoginComponent } from './login/login.component';
        },
        {
         path : 'user/form',
+        component: InputuserComponent
+       },
+       {
+        path : 'user/form/:id',
         component: InputuserComponent
        },
        {

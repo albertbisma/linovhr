@@ -8,7 +8,8 @@
       <div class="col-sm-6 mx-auto">
         <div class="card shadow-lg ">       
           <div class="card-header">
-              <h2 class="card-title">Create New User</h2>
+              <h2 class="card-title" id="createnewuser">Create New User</h2>
+              <h2 class="card-title" id="updateuser">Update User</h2>
           </div>   
           <div class="card-body">            
             <form [formGroup]="userForm" class="justify-content-center"  (ngSubmit)="onFormSubmit()" action="/userindex">
@@ -16,12 +17,15 @@
                 <div class="col-sm-4" align="right">
                   <label for="emailuser">Email User <font color="red">*)</font></label>            
                 </div>
-                  <div class="col-sm-6">
-                    <input type="email" class="form-control" id="emailuser" formControlName="email" placeholder="Input email here" required>                    
-                    <div *ngIf="email.touched && email.invalid" class="alert alert-danger">Email is required</div>
-                    <br>
-                  </div>
-                        
+                 
+                  <input type="text" class="form-control" formControlName="idUser" hidden>
+
+                <div class="col-sm-6">                  
+                  <input type="email" class="form-control" id="emailuser" formControlName="email" placeholder="Input email here" required>                    
+                  <div *ngIf="email.touched && email.invalid" class="alert alert-danger">Email is required</div>
+                  <br>
+                </div>
+                      
                 
                 <div class="col-sm-4" align="right">
                   <label for="User Type">User Type 

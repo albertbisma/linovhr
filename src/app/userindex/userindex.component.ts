@@ -13,16 +13,27 @@ import { ConfirmationService, Message } from 'primeng/primeng';
 export class UserindexComponent implements OnInit {
   users: any[];
   msgs:Message[]=[];  
-  
-
+  idUser:any;
+  user:any;    
   url = 'http://localhost:8080/user';
+  userForm: any;
 
   constructor(private http: Http, private confirmationService:ConfirmationService) {        
   }
 
   ngOnInit() {
-    this.getData();   
+    this.getData();      
   }
+
+  // loadData(id){
+  //   console.log(id);
+  //   this.http.get(this.url+'/'+id)
+  //   .subscribe(response => {
+  //     this.user = response.json();
+  //     console.log(this.user);
+  //     this.userForm.patchValue(this.user);
+  //   })
+  // }
 
   getData(){
     this.http.get(this.url)

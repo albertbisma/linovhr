@@ -7,12 +7,15 @@
       <div class="col-sm-6 mx-auto">
           <div class="card shadow-lg ">       
             <div class="card-header">
-                <h2 class="card-title">Create New Management</h2>
+                <h2 class="card-title" id="createnewmanagement">Create New Management</h2>
+                <h2 class="card-title" id="updatemanagement">Update Management</h2>
                 <h6>field with  <font color="red">*</font> is required.</h6>
             </div>   
             <div class="card-body">            
                 <form [formGroup]="managementForm" class="justify-content-center" (ngSubmit)="onFormSubmit()">      
                     <div class="form-group row">
+
+                        <input type="text" class="form-control" formControlName="idManagement" hidden>
                       
                       <div class="col-sm-4" align="right">
                         <label for="kodemanagement">Management Code <font color="red">*)</font></label>            
