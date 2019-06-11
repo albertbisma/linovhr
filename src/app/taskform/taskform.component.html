@@ -10,7 +10,8 @@
       <div class="col-sm-6 mx-auto">
         <div class="card shadow-lg ">       
           <div class="card-header">
-              <h2 class="card-title">Create New Task Type</h2>
+              <h2 class="card-title" id="createnewtask">Create New Task Type</h2>
+              <h2 class="card-title" id="updatetask">Update Task Type</h2>
           </div>   
           <div class="card-body">            
             <form [formGroup]="taskForm" class="justify-content-center"  (ngSubmit)="onFormSubmit()" action="/userindex">
@@ -19,6 +20,7 @@
                   <label for="emailuser">Task Code <font color="red">*)</font></label>            
                 </div>
                   <div class="col-sm-6">
+                    <input type="text" class="form-control"  formControlName="idTask" hidden>
                     <input type="text" class="form-control" id="emailuser" formControlName="kodeTask" placeholder="Input task code here" required>
                     <br>
                   </div>
@@ -43,225 +45,7 @@
          </form>           
           </div>
         </div>
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- MODAL -->      
-      
-      <!-- Modal -->
-      <!-- <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title">Add Detail Task</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <div class="modal-body">
-              <div class="container-fluid align-content-center">                              
-                
-                <form>                  
-                    <label for="kodetaskhdr">Task Code </label>
-                    
-                    <input type="text" class="form-control" name="kodetaskhdr" id="txttkodetask" value="T-001" disabled>                                                    
-                  
-                  
-                    <label for="kodetaskhdr">Task Name </label>
-                    
-                    <input type="text" class="form-control" name="namatask" id="txtnamatask"> 
-
-                    <label for="startdate">Start Date </label>
-                  
-                    <input type="date" class="form-control" name="startdate" id="inputstartdate"> 
-
-                    
-                    <label for="finishdate">Estimate Finish Date </label>
-                  
-                    <input name="finishdate" type="date" class="form-control" id="inputestimatedata"> 
-
-                    <label for="description">Description </label>
-                  
-                    <textarea class="form-control" name="description" id="txtareadesc" cols="30" rows="5"></textarea>
-                
-                </form>
-                                
-              </div>
-            </div>
-            <div class="modal-footer">              
-              <button type="button" class="btn btn-primary">Save</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <script>
-        $('#exampleModal').on('show.bs.modal', event => {
-          var button = $(event.relatedTarget);
-          var modal = $(this);
-          // Use above variables to manipulate the DOM
-          
-        });
-      </script>
-
-      
-
-
-
-      <div class="alert alert-danger" role="alert" style="display:none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-        data failed to create! please check your input!
-        </div>
-      <div class="alert alert-success" role="alert" style="display:none;"><i class="fa fa-check" aria-hidden="true"></i>
-        data successfully created!
-        </div>
-        
-      <h1>Create New Task</h1>
-      <form [formGroup]="userForm" class="justify-content-center"  (ngSubmit)="onFormSubmit()">
-        <div class="form-group row">
-        <div class="col-sm-1" align="right">
-          <label for="taskcode">Task Code</label>            
-        </div>
-  
-        <div class="col-sm-2">
-          <input type="text" class="form-control" id="taskcode" formControlName="" disabled value="TASK001">
-          <br>
-        </div>
-           
-        
-        <div class="col-sm-7" align="right">
-          <label for="User Type">Payroll Specialist Name</label>
-        </div>
-  
-        <div class="col-sm-2">
-          <input type="text" class="form-control" id="payrollname" formControlName="" disabled value="Amanda">
-          <br>
-        </div>
-        
-
-        <div class="col-sm-1" align="right">
-            <label for="taskcode">Month / Year</label>            
-          </div>           
-                          
-            <div class="col-sm-2" style="display:block">
-              <input type="month" class="form-control" name="monthyear" id="monthyear">
-              </div>   
-              <div class="col-sm-7" align="right">
-                  <label for="taskcode">Client</label>            
-                </div>           
-                                
-                  <div class="col-sm-2" style="display:block">
-                    <select id="month" name="month">
-                      <option value="">-- Select Client --</option>                      
-                    </select>              
-                  </div>        
-
-  
-                  <div class="col-sm-7" align="right">
-                      <button type="submit" class="btn btn-primary">Submit</button>   
-                      <button type="submit" class="btn btn-primary" [routerLink]="['/task']">Cancel</button>
-                  </div>        
-
-                  <br><br><br>
-                  <div class="col-sm-5"></div>
-                       
-                  <div>
-                      <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Detail</button>
-                  </div>
-                
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                      <thead>
-                        <tr class="table-primary">
-                          <th>#</th>
-                          <th>Task Name</th>
-                          <th>Start Date</th>
-                          <th>Estimate Finish Date</th>
-                          <th>Description</th>
-                          <th>Finish At</th>
-                          <th>Note Final</th>
-                          <th>Status Task</th>
-                          <th style="text-align:center">Action</th>                    
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Task 1 - Penggajian</td>
-                          <td>2019-05-01</td>                                        
-                          <td>2019-05-15</td>
-                          <td>Penggajian divisi Sales & Merchandisep</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>Pending</td>
-                          <td style="text-align:center">
-                            <button type="button" class="btn btn-success btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-check"></i></button>
-                            <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-pencil"></i></button>
-                            <button type="button" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
-                          </td>
-                        </tr>           
-                        
-                        <tr>
-                            <td>2</td>
-                            <td>Task 2 - Presensi</td>
-                            <td>2019-05-16</td>                                        
-                            <td>2019-05-25</td>
-                            <td>Akumulasi presensi karyawan bulan mei </td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>On Progress</td>
-                            <td style="text-align:center">
-                              <button type="button" class="btn btn-success btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-check"></i></button>
-                              <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-pencil"></i></button>
-                              <button type="button" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
-                            </td>
-                          </tr>           
-
-                          <tr>
-                              <td>3</td>
-                              <td>Task 3 - Membuat Laporan </td>
-                              <td>2019-05-26</td>                                        
-                              <td>2019-05-30</td>
-                              <td>Membuat laporan bulan mei  </td>
-                              <td>-</td>
-                              <td>-</td>
-                              <td>Waiting</td>
-                              <td style="text-align:center">
-                                <button type="button" class="btn btn-success btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-check"></i></button>
-                                <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/taskform"><i class="fa fa-pencil"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
-                              </td>
-                          </tr>           
-                      </tbody>
-                    </table>
-                  </div> -->
-
-              
-    <!--      
-        <div class="col-sm-4">
-          <input type="text" class="form-control" id="usertype" placeholder="Input user type here" required>
-        </div>             -->
-        <!-- </div>                 
-     </form>            -->
+      </div>      
     </div>
     </section>
     

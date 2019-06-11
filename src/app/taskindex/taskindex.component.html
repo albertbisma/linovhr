@@ -32,7 +32,7 @@
 
                       <ng-template let-tsk="rowData" pTemplate>
                         <div class="my-center-text">
-                          <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/userform"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-primary btn-circle btn-lg" routerLink="/tasktype/form/{{tsk.idTask}}"><i class="fa fa-pencil"></i></button>
                           <button type="submit" (click)="confirmDelete(tsk.idTask, tsk.kodeTask, tsk.jenisTask)" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-trash"></i></button>
                         </div>
                       </ng-template>

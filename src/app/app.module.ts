@@ -158,6 +158,10 @@ import { LoginComponent } from './login/login.component';
          component: TaskformComponent,
        },
        {
+        path : 'tasktype/form/:id',
+        component: TaskformComponent,
+      },
+       {
         path : 'mappingindex',
         component: MappingclientindexComponent,
        },
