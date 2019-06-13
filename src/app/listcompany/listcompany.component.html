@@ -1,377 +1,265 @@
-<app-topnav></app-topnav> 
+<app-topnav></app-topnav>
 <!-- Team -->
 <section id="team" class="pb-5">
     <div class="container-fluid">
-        <h5 class="section-title h1">LIST COMPANY</h5>               
+        <h1 class="text-center">Schedule for July 2019</h1>
 
-        <div class="row">
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let company of companys">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="data:image/png;base64,{{company.logo}}" alt="card image"></p>
-                                    <h4 class="card-title">{{company.client.nama}}</h4>                                                                        
-                                </div>
+        <div class="ui-g collapse">
+            <div class="ui-g-12 ui-md-4 ui-md-offset-9">
+                <p-fieldset [toggleable]="true" [collapsed]="true">
+                    <p-header>Change Period</p-header>
+                    <form [formGroup]="formPeriod">
+
+                        <div class="ui-g">
+                            <div class="ui-g-3">
+                                <label for="month">Month </label>
+                            </div>
+                            <div class="ui-g-9">
+                                <select id="month" name="month" formControlName="bulan">
+                                <option value="" disabled="true">-- Select Month --</option>
+                                <option value="JANUARI">January</option>
+                                <option value="FEBRUARI">February</option>
+                                <option value="MARET">March</option>
+                                <option value="APRIL">April</option>
+                                <option value="MEI">May</option>
+                                <option value="JUNI">June</option>
+                                <option value="JULI">July</option>
+                                <option value="AGUSTUS">August</option>
+                                <option value="SEPTEMBER">September</option>
+                                <option value="OKTOBER">October</option>
+                                <option value="NOVEMBER">November</option>
+                                <option value="DESEMBER">Desember</option>
+                              </select>
+                            </div>
+
+                        </div>
+
+                        <div class="ui-g">
+                            <div class="ui-g-3">
+                                <label for="year">Year </label>
+                            </div>
+                            <div class="ui-g-9">
+                                <select id="year" name="year" formControlName="tahun">
+                                <option value="" disabled="true">-- Select Year --</option>
+                                <option *ngFor="let year of years; first as isFirst" value="{{year}}" [selected]="isFirst ? true : false">
+                                  {{year}}
+                                </option>
+                              </select>
                             </div>
                         </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Task In This Month! <a routerLink="/company/scheduleindex" class="btn btn-primary btn-sm"><i class="fa fa-calendar" style="color:white"></i></a></h4>                                                                        
-                                        <div class="scrollaccordion overflow-auto" >
-                                            <div id="accordion">                                        
-                                                    <div class="card-header" role="tab" id="section1HeaderId">
-                                                        <h5 class="mb-0">
-                                                            <button class="btn btn-link" data-toggle="collapse"  data-target="#section1ContentId" aria-expanded="false" aria-controls="section1ContentId">
-                                                                Task 1                                                                 
-                                                            </button>
-                                                        </h5>
-                                                    </div>
-                                                    <div id="section1ContentId" class="collapse" aria-labelledby="section1HeaderId" data-parent="#accordion">
-                                                        <div class="card-body">                                                            
-                                                            <div class="accordioncontenthdr"> 2019/05/01 - 2019/05/15<button class="btn btn-link fa fa-pencil" align="right"></button> </div>                                                             
-                                                            <div class="accordioncontentdtl"> Mengerjakan Payroll kelas direktur dan manager</div>                                                             
-                                                        </div>
-                                                    </div>    
-                                                    
-                                                    <div class="card-header" role="tab" id="section2HeaderId">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section2ContentId" aria-expanded="false" aria-controls="section2ContentId">
-                                                                    Section 2
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="section2ContentId" class="collapse" aria-labelledby="section2HeaderId" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                Section 2 content
-                                                            </div>
-                                                        </div>    
+                    </form>
+                </p-fieldset>
+            </div>
+        </div>
 
-                                                        <div class="card-header" role="tab" id="section3HeaderId">
-                                                                <h5 class="mb-0">
-                                                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section3ContentId" aria-expanded="false" aria-controls="section3ContentId">
-                                                                        Section 3
-                                                                    </button>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="section3ContentId" class="collapse" aria-labelledby="section3HeaderId" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    Section 3 content
-                                                                </div>
-                                                            </div>    
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid align-content-center">
 
-                                                            <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-                                                                
-                                                                <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-
-                                                                <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-                                            </div>
-                                        </div>
-                                </div>
+                            <table>
+                                <tr>
+                                    <td><label for="kodeTask">Kode</label></td>
+                                    <td>:</td>
+                                    <td><input type="text" name="jenisTask"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="jenisTask">Nama</label></td>
+                                    <td>:</td>
+                                    <td><input type="text" name="jenisTask"></td>
+                                </tr>
+                            </table>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <!-- ./Team member -->
 
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-1 ui-md-offset-11">
+                <button pButton type="button" icon="fa-check" label="Save" class="ui-button-succes"></button>
+            </div>
+        </div>
 
-             <!-- Team member -->
-             <!-- <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRzaGslSWK5jm_bQQrx_rmsYuyhwBNw-8vy2bXtEEPK698iQrp" alt="card image"></p>
-                                    <h4 class="card-title">Prudential Indonesia</h4>                                                                        
-                                </div>
+        <p-carousel *ngIf="isClientReady" headerText="Silahkan pilih client yang akan ditangani :" [value]="listClient" numVisible="3" circular="true" pageLinks="5">
+            <ng-template let-item pTemplate="item">
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12" style="text-align: center"><img *ngIf="mapLogo.has(item.client.idClient)" src="data:image/png;base64,{{mapLogo.get(item.client.idClient)}}" alt="{{item.client.kodeClient}}" width="100" height="100"></div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12" style="text-align: center">{{item.client.kodeClient}}</div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12" style="text-align: center">{{item.client.nama}}</div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12" *ngIf="item.tasks; else elseBlock">
+                            <div class="text-center">
+                                <button [id]="'btn-' + item.tasks.idHdr" [class]="item.tasks.idHdr + ' collapse'" type="button" pButton icon="fa-plus" label="Add this Client" data-toggle="collapse" [attr.data-target]="'.' + item.tasks.idHdr" style="align-middle" aria-expanded="true"
+                                    [attr.aria-controls]="'panel-' + item.tasks.idHdr + ' btn-' + item.tasks.idHdr"></button>
                             </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Task In This Month! <a routerLink="/company/scheduleindex" class="btn btn-primary btn-sm"><i class="fa fa-calendar" style="color:white"></i></a></h4>                                                                        
-                                        <div class="scrollaccordion overflow-auto" >
-                                            <div id="accordion">                                        
-                                                    <div class="card-header" role="tab" id="section1HeaderId">
-                                                        <h5 class="mb-0">
-                                                            <button class="btn btn-link" data-toggle="collapse"  data-target="#section1ContentId" aria-expanded="false" aria-controls="section1ContentId">
-                                                                Task 1                                                                 
-                                                            </button>
-                                                        </h5>
+
+                            <p-panel [id]="'panel-' + item.tasks.idHdr" [class]="item.tasks.idHdr + ' collapse show'">
+                                <p-header>
+                                    <div class="ui-helper-clearfix">
+                                        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Detail Schedule</span>
+                                        <button pButton type="button" icon="fa-close" label="Remove" class="ui-button-danger" style="float: right" data-toggle="collapse" [attr.data-target]="'.' + item.tasks.idHdr" aria-expanded="false" [attr.aria-controls]="'panel-' + item.tasks.idHdr + ' btn-' + item.tasks.idHdr"></button>
+                                    </div>
+                                </p-header>
+                                <form [formGroup]="formHdr">
+
+                                    <!-- <div *ngFor="let detail of item.tasks.dtlCreateTask">
+                                        <p-panel [toggleable]="true" expandIcon="fa-chevron-down" collapseIcon="fa-chevron-right">
+                                            <p-header>
+                                                <p-checkbox name="task" value="{{detail.task.kodeTask}}" label="{{detail.task.jenisTask}}" inputId="{{detail.task.idTask}}"></p-checkbox>
+                                            </p-header>
+
+                                            <form [formGroup]="formDtl">
+                                                <table>
+                                                    <tr>
+                                                        <td><label for="startdate">Start Date</label></td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <p-calendar formControlName="tglAwal" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="finishDate">Estimate Finish Date</label></td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <p-calendar formControlName="tglAkhir" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <p-footer>
+                                                    <label for="keterangan">Description </label>
+                                                    <textarea class="form-control" name="keterangan" id="txtareadesc" cols="30" rows="5" value="detail.keterangan"></textarea>
+                                                </p-footer>
+                                            </form>
+                                        </p-panel>
+                                    </div> -->
+
+                                    <div *ngFor="let task of tasks">
+                                        <p-panel [toggleable]="true" expandIcon="fa-chevron-down" collapseIcon="fa-chevron-right" collapsed="true">
+                                            <p-header>
+                                                <p-checkbox name="task" value="{{task.kodeTask}}" label="{{task.jenisTask}}" inputId="{{task.idTask}}"></p-checkbox>
+                                            </p-header>
+
+                                            <form [formGroup]="formDtl">
+                                                <table>
+                                                    <tr>
+                                                        <td><label for="startdate">Start Date</label></td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <p-calendar formControlName="tglAwal" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="finishDate">Estimate Finish Date</label></td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <p-calendar formControlName="tglAkhir" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <p-footer>
+                                                    <div>
+                                                        <label for="keterangan">Description </label>
                                                     </div>
-                                                    <div id="section1ContentId" class="collapse" aria-labelledby="section1HeaderId" data-parent="#accordion">
-                                                        <div class="card-body">                                                            
-                                                            <div class="accordioncontenthdr"> 2019/05/01 - 2019/05/15<button class="btn btn-link fa fa-pencil" align="right"></button> </div>                                                             
-                                                            <div class="accordioncontentdtl"> Mengerjakan Payroll kelas direktur dan manager</div>                                                             
-                                                        </div>
-                                                    </div>    
-                                                    
-                                                    <div class="card-header" role="tab" id="section2HeaderId">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section2ContentId" aria-expanded="false" aria-controls="section2ContentId">
-                                                                    Section 2
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="section2ContentId" class="collapse" aria-labelledby="section2HeaderId" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                Section 2 content
-                                                            </div>
-                                                        </div>    
 
-                                                        <div class="card-header" role="tab" id="section3HeaderId">
-                                                                <h5 class="mb-0">
-                                                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section3ContentId" aria-expanded="false" aria-controls="section3ContentId">
-                                                                        Section 3
-                                                                    </button>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="section3ContentId" class="collapse" aria-labelledby="section3HeaderId" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    Section 3 content
-                                                                </div>
-                                                            </div>    
+                                                    <div>
+                                                        <textarea class="form-control" name="keterangan" id="txtareadesc" cols="30" rows="5"></textarea>
+                                                    </div>
+                                                </p-footer>
+                                            </form>
+                                        </p-panel>
+                                    </div>
+                                </form>
 
-                                                            <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-                                                                
-                                                                <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
+                                <p-footer>
+                                    <button pButton type="button" icon="fa-plus" label="Add New Task" class="ui-button-primary" data-toggle="modal" data-target="#createModal"></button>
+                                </p-footer>
+                            </p-panel>
 
-                                                                <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
                         </div>
+
+                        <ng-template #elseBlock>
+                            <div class="ui-grid-col-12">
+
+                                <div class="text-center">
+                                    <button [id]="'btn-' + item.client.idClient" [class]="item.client.idClient + ' collapse show'" type="button" pButton icon="fa-plus" label="Add this Client" data-toggle="collapse" [attr.data-target]="'.' + item.client.idClient" style="align-middle" aria-expanded="true"
+                                        [attr.aria-controls]="'panel-' + item.client.idClient + ' btn-' + item.client.idClient"></button>
+                                </div>
+
+                                <p-panel [id]="'panel-' + item.client.idClient" [class]="item.client.idClient + ' collapse'">
+                                    <p-header>
+                                        <div class="ui-helper-clearfix">
+                                            <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Detail Schedule</span>
+                                            <button pButton type="button" icon="fa-close" label="Remove" class="ui-button-danger" style="float: right" data-toggle="collapse" [attr.data-target]="'.' + item.client.idClient" aria-expanded="false" [attr.aria-controls]="'panel-' + item.client.idClient + ' btn-' + item.client.idClient"></button>
+                                        </div>
+                                    </p-header>
+
+                                    <form [formGroup]="formHdr">
+
+                                        <div *ngFor="let task of tasks">
+                                            <p-panel [toggleable]="true" expandIcon="fa-chevron-down" collapseIcon="fa-chevron-right" collapsed="true">
+                                                <p-header>
+                                                    <p-checkbox name="task" value="{{task.kodeTask}}" label="{{task.jenisTask}}" inputId="{{task.idTask}}"></p-checkbox>
+                                                </p-header>
+
+                                                <form [formGroup]="formDtl">
+                                                    <table>
+                                                        <tr>
+                                                            <td><label for="startdate">Start Date</label></td>
+                                                            <td>:</td>
+                                                            <td>
+                                                                <p-calendar formControlName="tglAwal" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><label for="finishDate">Estimate Finish Date</label></td>
+                                                            <td>:</td>
+                                                            <td>
+                                                                <p-calendar formControlName="tglAkhir" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <p-footer>
+                                                        <div>
+                                                            <label for="keterangan">Description </label>
+                                                        </div>
+
+                                                        <div>
+                                                            <textarea class="form-control" name="keterangan" id="txtareadesc" cols="30" rows="5"></textarea>
+                                                        </div>
+                                                    </p-footer>
+                                                </form>
+                                            </p-panel>
+                                        </div>
+                                    </form>
+                                    <p-footer>
+                                        <button pButton type="button" icon="fa-plus" label="Add New Task" class="ui-button-primary" data-toggle="modal" data-target="#createModal"></button>
+                                    </p-footer>
+                                </p-panel>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
-            </div> -->
-            <!-- ./Team member -->
+            </ng-template>
+        </p-carousel>
 
-
-             <!-- Team member -->
-             <!-- <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://upload.wikimedia.org/wikipedia/id/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png" alt="card image"></p>
-                                    <h4 class="card-title">Fast Food Indonesia</h4>                                                                        
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Task In This Month! <a routerLink="/company/scheduleindex" class="btn btn-primary btn-sm"><i class="fa fa-calendar" style="color:white"></i></a></h4>                                                                        
-                                        <div class="scrollaccordion overflow-auto" >
-                                            <div id="accordion">                                        
-                                                    <div class="card-header" role="tab" id="section1HeaderId">
-                                                        <h5 class="mb-0">
-                                                            <button class="btn btn-link" data-toggle="collapse"  data-target="#section1ContentId" aria-expanded="false" aria-controls="section1ContentId">
-                                                                Task 1                                                                 
-                                                            </button>
-                                                        </h5>
-                                                    </div>
-                                                    <div id="section1ContentId" class="collapse" aria-labelledby="section1HeaderId" data-parent="#accordion">
-                                                        <div class="card-body">                                                            
-                                                            <div class="accordioncontenthdr"> 2019/05/01 - 2019/05/15<button class="btn btn-link fa fa-pencil" align="right"></button> </div>                                                             
-                                                            <div class="accordioncontentdtl"> Mengerjakan Payroll kelas direktur dan manager</div>                                                             
-                                                        </div>
-                                                    </div>    
-                                                    
-                                                    <div class="card-header" role="tab" id="section2HeaderId">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section2ContentId" aria-expanded="false" aria-controls="section2ContentId">
-                                                                    Section 2
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="section2ContentId" class="collapse" aria-labelledby="section2HeaderId" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                Section 2 content
-                                                            </div>
-                                                        </div>    
-
-                                                        <div class="card-header" role="tab" id="section3HeaderId">
-                                                                <h5 class="mb-0">
-                                                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section3ContentId" aria-expanded="false" aria-controls="section3ContentId">
-                                                                        Section 3
-                                                                    </button>
-                                                                </h5>
-                                                            </div>
-                                                            <div id="section3ContentId" class="collapse" aria-labelledby="section3HeaderId" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    Section 3 content
-                                                                </div>
-                                                            </div>    
-
-                                                            <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-                                                                
-                                                                <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-
-                                                                <div class="card-header" role="tab" id="section4HeaderId">
-                                                                    <h5 class="mb-0">
-                                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#section4ContentId" aria-expanded="false" aria-controls="section4ContentId">
-                                                                            Section 4
-                                                                        </button>
-                                                                    </h5>
-                                                                </div>
-                                                                <div id="section4ContentId" class="collapse" aria-labelledby="section4HeaderId" data-parent="#accordion">
-                                                                    <div class="card-body">
-                                                                        Section 4 content
-                                                                    </div>
-                                                                </div>    
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- ./Team member -->
-
-            <!-- Team member -->
-            <!-- <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://upload.wikimedia.org/wikipedia/id/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png" alt="card image"></p>
-                                    <h4 class="card-title">Prudential Indonesia</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-skype"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>                            
-       </div> -->
-
-       
+    </div>
+</section>

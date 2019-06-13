@@ -20,23 +20,52 @@ export class ReportmonthComponent implements OnInit {
   month: string;
   year: string;
   years = [];
+  jadwal: any;
+  minDate: Date;
+  maxDate: Date;
 
   downloadText = 'Download Report';
 
+formJadwal: FormGroup;
+
   url = "http://localhost:8080/report/payroll/";
   jasperUrl = "http://localhost:8080/jasper/ps/";
+  jadwalUrl = 'http://localhost:8080/jadwal/';
 
   constructor(private formBuilder: FormBuilder, private http: Http) {}
 
   ngOnInit() {
-    this.createRptPSForm();
+    this.getPeriod();
+    this.getJadwal();
     this.getYears();
+    this.createRptPSForm();
+  }
+
+  getPeriod() {
+    let today = new Date();
+    this.minDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    this.maxDate = new Date(today.getFullYear(), today.getMonth() + 1, 10);
   }
 
   createRptPSForm() {
     this.rptPSForm = this.formBuilder.group({
       bulan: ["", Validators.required],
       tahun: ["", Validators.required]
+    });
+  }
+
+  createFormJadwal() {
+    this.formJadwal = this.formBuilder.group({
+      idJadwal: this.jadwal.idJadwal,
+      jadwalEdit: ["", Validators.required]
+    });
+  }
+
+  getJadwal() {
+    this.http.get(this.jadwalUrl).subscribe(r => {
+      this.jadwal = r.json();
+      console.log(this.jadwal);
+      this.createFormJadwal();
     });
   }
 

@@ -1,16 +1,16 @@
-<app-topnav></app-topnav> 
+<app-topnav></app-topnav>
 <section id="team" class="pb-5">
-  <div class="container-fluid">
+    <div class="container-fluid">
 
-    <h1>Report By Company</h1>
-    <form [formGroup]='rptClientForm' class="justify-content-center" (ngSubmit)='onFormSubmit()'>
-      <div class="form-group row">
-        <div class="col-sm-4" align="right">
-          <label for="month">Month </label>
-        </div>
+        <h1>Report By Company</h1>
+        <form [formGroup]='rptClientForm' class="justify-content-center" (ngSubmit)='onFormSubmit()'>
+            <div class="form-group row">
+                <div class="col-sm-4" align="right">
+                    <label for="month">Month </label>
+                </div>
 
-        <div class="col-sm-4">
-          <select id="month" name="month" formControlName="bulan">
+                <div class="col-sm-4">
+                    <select id="month" name="month" formControlName="bulan">
             <option value="" disabled="true">-- Select Month Here --</option>
             <option value="JANUARI">January</option>
             <option value="FEBRUARI">February</option>
@@ -25,137 +25,140 @@
             <option value="NOVEMBER">November</option>
             <option value="DESEMBER">Desember</option>
           </select>
-          <br><br>
-        </div>
+                    <br><br>
+                </div>
 
-        <div class="col-sm-4 idexist" style="display:block;"></div>
+                <div class="col-sm-4 idexist" style="display:block;"></div>
 
-        <div class="col-sm-4" align="right">
-          <label for="year">Year </label>
-        </div>
+                <div class="col-sm-4" align="right">
+                    <label for="year">Year </label>
+                </div>
 
-        <div class="col-sm-4">
-          <select id="year" name="year" formControlName="tahun">
+                <div class="col-sm-4">
+                    <select id="year" name="year" formControlName="tahun">
             <option value="" disabled="true">-- Select Year --</option>
             <option *ngFor="let year of years" value="{{year}}">
               {{year}}
             </option>
           </select>
-          <br><br>
-        </div>
+                    <br><br>
+                </div>
 
-        <div class="col-sm-4">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-    </form>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
 
-    <!--------------------------------------------------------->
-    <div *ngIf="reports">
-      <h4 class="font-weight-bold">Period : {{month}} {{year}} </h4>
-      <button id="btn-download" role="button" class="btn btn-primary" (click)="downloadPDF()"><span *ngIf="downloadText === 'Downloading'" class="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"></span>{{ downloadText }}</button>
-    </div>
-    <div class="accordion" id="accordionExample">
-      <div class="card" *ngFor="let report of reports; index as i; first as isFirst; last as isLast">
-        <button [id]="'client-' + i"
-          [class]="isFirst ? 'btn btn-info btn-lg btn-block text-left' : 'btn btn-info btn-lg btn-block text-left collapsed'"
-          type="button" data-toggle="collapse" [attr.data-target]="'#collapse-' + i"
-          [attr.aria-pressed]="isFirst ? 'true' : 'false'" [attr.aria-expanded]="isFirst ? 'true' : 'false'"
-          [attr.aria-controls]="'collapse-' + i">
+        <span *ngIf="jadwal">Report bulan ini akan dikirim otomatis pada {{jadwal.jam}} {{jadwal.tanggal}}  <button type="text" pButton label="Ubah" icon="fa-cogs" (click)="op1.toggle($event)"></button>
+      <p-overlayPanel #op1 [showCloseIcon]="true">
+          <form [formGroup]="formJadwal">
+              <p-calendar formControlName="jadwalEdit" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [inline]="true" [showTime]="true" dateFormat="dd/MM/yyyy"></p-calendar>
+              <br>
+              {{jadwalEdit}}
+              <br>
+              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="button" class="btn btn-secondary" (click)="op1.hide($event)">Cancel</button>
+          </form>
+      </p-overlayPanel>
+    </span>
+
+        <!--------------------------------------------------------->
+        <div *ngIf="reports">
+            <h4 class="font-weight-bold">Period : {{month}} {{year}} </h4>
+            <button id="btn-download" role="button" class="btn btn-primary" (click)="downloadPDF()"><span *ngIf="downloadText === 'Downloading'" class="spinner-grow spinner-grow-sm m-1" role="status" aria-hidden="true"></span>{{ downloadText }}</button>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="card" *ngFor="let report of reports; index as i; first as isFirst; last as isLast">
+                <button [id]="'client-' + i" [class]="isFirst ? 'btn btn-info btn-lg btn-block text-left' : 'btn btn-info btn-lg btn-block text-left collapsed'" type="button" data-toggle="collapse" [attr.data-target]="'#collapse-' + i" [attr.aria-pressed]="isFirst ? 'true' : 'false'"
+                    [attr.aria-expanded]="isFirst ? 'true' : 'false'" [attr.aria-controls]="'collapse-' + i">
           <strong>{{report.kodeClient}} - {{report.namaClient}}</strong>
         </button>
 
-        <div [id]="'collapse-' + i" [class]="isFirst ? 'collapse show' : 'collapse'" aria-labelledby="headingOne"
-          data-parent="#accordionExample">
-          <div class="card-body">
-            <table>
-              <tr>
-                <td>Kode Perusahaan</td>
-                <td>:</td>
-                <td>{{report.kodeClient}}</td>
-              </tr>
-              <tr>
-                <td>Nama Perusahaan</td>
-                <td>:</td>
-                <td>{{report.namaClient}}</td>
-              </tr>
-              <tr>
-                <td>Kode Payroll Specialist</td>
-                <td>:</td>
-                <td>{{report.kodePs}}</td>
-              </tr>
-              <tr>
-                <td>Nama Payroll Specialist</td>
-                <td>:</td>
-                <td>{{report.namaPs}}</td>
-              </tr>
-              <tr>
-                <td>Jumlah Task</td>
-                <td>:</td>
-                <td>{{report.taskDone.length + report.taskPending.length + report.taskResolved.length}}</td>
-              </tr>
-              <tr>
-                <td>Jumlah Task Selesai</td>
-                <td>:</td>
-                <td>{{report.taskDone.length}}</td>
-              </tr>
-              <tr>
-                <td>Jumlah Task Tidak Selesai</td>
-                <td>:</td>
-                <td>{{report.taskPending.length + report.taskResolved.length}}</td>
-              </tr>
-            </table>
-            <div class="table-responsive table-inverse">
-              <table class="table">
-                <thead class="thead-light">
-                  <tr>
-                    <th class="text-center">Kode Task</th>
-                    <th class="text-center">Task</th>
-                    <th class="text-center">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let task of report.taskPending">
-                    <td class="text-center">{{task.kodeTask}}</td>
-                    <td class="text-center">{{task.jenisTask}}</td>
-                    <td class="text-center text-danger">PENDING</td>
-                  </tr>
-                  <tr *ngFor="let task of report.taskResolved">
-                    <td class="text-center">{{task.kodeTask}}</td>
-                    <td class="text-center">{{task.jenisTask}}</td>
-                    <td class="text-center text-warning">RESOLVED</td>
-                  </tr>
-                  <tr *ngFor="let task of report.taskDone">
-                    <td class="text-center">{{task.kodeTask}}</td>
-                    <td class="text-center">{{task.jenisTask}}</td>
-                    <td class="text-center text-primary">DONE</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <br>
-            <div class="row justify-content-end">
-              <div class="col-auto" *ngIf="!isFirst">
-                <button type="button" class="btn btn-outline-danger" data-toggle="collapse"
-                  [attr.data-target]="'#collapse-' + [ i - 1 ]" [attr.aria-controls]="'collapse-' + [ i - 1 ]"
-                  (click)="scrollToElement('client-' + [ i - 1 ])">Previous</button>
-              </div>
-              <div class="col-2" *ngIf="!isLast; else elseBlock">
-                <button type="button" class="btn btn-outline-primary" data-toggle="collapse"
-                  [attr.data-target]="'#collapse-' + [ i + 1 ]" [attr.aria-controls]="'collapse-' + [ i + 1 ]"
-                  (click)="scrollToElement('client-' + [ i + 1 ])">Next</button>
-              </div>
-              <ng-template #elseBlock>
-                <div class="col-2">
-                  <button type="button" class="btn btn-outline-primary" data-toggle="collapse"
-                    [attr.data-target]="'#collapse-' + 0" [attr.aria-controls]="'collapse-' + 0"
-                    (click)="scrollToElement('client-' + 0)">Back to First</button>
+                <div [id]="'collapse-' + i" [class]="isFirst ? 'collapse show' : 'collapse'" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td>Kode Perusahaan</td>
+                                <td>:</td>
+                                <td>{{report.kodeClient}}</td>
+                            </tr>
+                            <tr>
+                                <td>Nama Perusahaan</td>
+                                <td>:</td>
+                                <td>{{report.namaClient}}</td>
+                            </tr>
+                            <tr>
+                                <td>Kode Payroll Specialist</td>
+                                <td>:</td>
+                                <td>{{report.kodePs}}</td>
+                            </tr>
+                            <tr>
+                                <td>Nama Payroll Specialist</td>
+                                <td>:</td>
+                                <td>{{report.namaPs}}</td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Task</td>
+                                <td>:</td>
+                                <td>{{report.taskDone.length + report.taskPending.length + report.taskResolved.length}}</td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Task Selesai</td>
+                                <td>:</td>
+                                <td>{{report.taskDone.length}}</td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Task Tidak Selesai</td>
+                                <td>:</td>
+                                <td>{{report.taskPending.length + report.taskResolved.length}}</td>
+                            </tr>
+                        </table>
+                        <div class="table-responsive table-inverse">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-center">Kode Task</th>
+                                        <th class="text-center">Task</th>
+                                        <th class="text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let task of report.taskPending">
+                                        <td class="text-center">{{task.kodeTask}}</td>
+                                        <td class="text-center">{{task.jenisTask}}</td>
+                                        <td class="text-center text-danger">PENDING</td>
+                                    </tr>
+                                    <tr *ngFor="let task of report.taskResolved">
+                                        <td class="text-center">{{task.kodeTask}}</td>
+                                        <td class="text-center">{{task.jenisTask}}</td>
+                                        <td class="text-center text-warning">RESOLVED</td>
+                                    </tr>
+                                    <tr *ngFor="let task of report.taskDone">
+                                        <td class="text-center">{{task.kodeTask}}</td>
+                                        <td class="text-center">{{task.jenisTask}}</td>
+                                        <td class="text-center text-primary">DONE</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="row justify-content-end">
+                            <div class="col-auto" *ngIf="!isFirst">
+                                <button type="button" class="btn btn-outline-danger" data-toggle="collapse" [attr.data-target]="'#collapse-' + [ i - 1 ]" [attr.aria-controls]="'collapse-' + [ i - 1 ]" (click)="scrollToElement('client-' + [ i - 1 ])">Previous</button>
+                            </div>
+                            <div class="col-2" *ngIf="!isLast; else elseBlock">
+                                <button type="button" class="btn btn-outline-primary" data-toggle="collapse" [attr.data-target]="'#collapse-' + [ i + 1 ]" [attr.aria-controls]="'collapse-' + [ i + 1 ]" (click)="scrollToElement('client-' + [ i + 1 ])">Next</button>
+                            </div>
+                            <ng-template #elseBlock>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="collapse" [attr.data-target]="'#collapse-' + 0" [attr.aria-controls]="'collapse-' + 0" (click)="scrollToElement('client-' + 0)">Back to First</button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
                 </div>
-              </ng-template>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>

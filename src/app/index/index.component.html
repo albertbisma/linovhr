@@ -1,3 +1,163 @@
-<div class="container-fluid">
-<p> Index works!</p>
-</div>
+<app-topnav></app-topnav> 
+<section id="team" class="pb-5">
+    <div class="container-fluid">
+        <div class="row">    
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4">
+                <p-dataGrid [value]="tasks" [paginator]="true" [rows]="6">
+                        <p-header>List of Client</p-header>
+                        <p-footer>Choose from list to show task detail.</p-footer>
+                        <ng-template let-task let-i="index" pTemplate="item">
+                            <div class="ui-g-12 ui-md-4 ui-lg-4 ui-xl-4">
+                                <p-panel [header]="i+1" [style]="{'text-align':'center'}">     
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="gambarlogo1">
+                                        <img *ngIf="logos.has(task.client.idClient)" src="data:image/png;base64,{{logos.get(task.client.idClient)}}" id="gambarlogo" />
+                                    </div>
+                                        <div id="namaclient">{{task.client.nama}}</div>
+                                        <hr class="ui-widget-content" style="border-top:0">
+                                        <button type="button" (click)="active(task)" class="btn btn-default" class="{{task.active ? 'active' : 'non-active'}}"><i class="fa fa-eye" (click)="onClick(task.payrollSpecialist.nama, task.client.nama)" style="cursor:pointer"></i></button>
+                                    </p-panel>                           
+                            </div>
+                        </ng-template>
+                </p-dataGrid>
+            </div>
+
+            <div class="col-sm-8">
+                <p-dataTable [value]="detail" resizableColumns="true">                                                
+                        <p-header> List of <strong>Pending</strong> Task</p-header>
+                        <p-footer>  <button type="button" data-toggle="modal" data-target="#createModal" class="btn btn-info btn-sm btn3d"><b>Resolve all</b></button></p-footer>
+                        <p-column header="#" [style]="{'width':'5%'}">
+                            <ng-template let-i="rowIndex" pTemplate="body">
+                                {{i+1}}  
+                            </ng-template>
+                        </p-column>
+                        <!-- <p-column field="hdrCreateTask.client.nama" header="Client Name"></p-column> -->
+                        <p-column field="task.jenisTask" header="Task Type"></p-column>
+                        <p-column field="tglAwal" header="Estimate Start Date"></p-column>
+                        <p-column field="tglAkhir" header="Estimate Finish Date"></p-column>
+                        <p-column field="keterangan" header="Description"></p-column>                    
+                        <p-column field="" header="Action">
+                            <ng-template let-idx="rowData" pTemplate>
+                              <div class="my-center-text">
+                                <div class="btn-group-sm col-sm-12" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    <button type="button" (click) = "confirmDelete(idx.dtlCreateTask.idDtl, idx.task.jenisTask, idx.dtlCreateTask.hdrCreateTask.nama, idx.dtlCreateTask.hdrCreateTask.client.nama)" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                  </div>
+                              </div>
+                            </ng-template>
+                          </p-column>        
+                </p-dataTable>
+            </div>
+
+
+            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-md  modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Resolve All Task</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid align-content-center">
+    
+                                <table >
+                                    <tr>
+                                        <td><label for="kodeTask">Realize Date</label></td>
+                                        <td>:</td>
+                                        <td><input class="form-control" type="date" name="realizeddate"><br></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="jenisTask">Note</label></td>
+                                        <td>:</td>
+                                        <td><textarea class="form-control" name="" id="" rows="3"></textarea></td>                                            
+                                    </tr>
+                                </table>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-3 col-sm-3 col-md-3 col-lg-3">            
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBYeMUsqg2VE__UMg6SvpmDL5Ys_vlyNeAO7xrpSaEQWqR7yaH" class="card-img" alt="...">
+                            </div>
+    
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">PT.MERCEDES BENZ</h5>
+                                    <p class="card-text">Task Bulan Ini : 4 
+                                    <br>Task Belum Dikerjakan : 2 
+                                    <br>Task Sudah Dikerjakan : 2 </p>                             
+                                    <div>
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#exampleModalCenter"> View Task</i></button>                                                                                                           
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+            </div>     
+        
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3">            
+
+            </div>
+
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3">            
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-12 col-md-12 col-sm-12 col-lg-12">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBYeMUsqg2VE__UMg6SvpmDL5Ys_vlyNeAO7xrpSaEQWqR7yaH" class="card-img" alt="...">
+                            </div>
+
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="card-body">
+                                    <h5 class="card-title">PT.MERCEDES BENZ</h5>
+                                    <p class="card-text">Task Bulan Ini : 4 
+                                    <br>Task Belum Dikerjakan : 2 
+                                    <br>Task Sudah Dikerjakan : 2 </p>                             
+                                    <div>
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-eye" aria-hidden="true" data-toggle="modal" data-target="#exampleModalCenter"> View Task</i></button>                                                                                                            
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+            </div>     
+            
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3">            
+                
+            </div>
+        
+    </div>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+    </div>
+</section>
+<app-footer></app-footer>

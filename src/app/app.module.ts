@@ -4,7 +4,26 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 
-import { InputMaskModule,CheckboxModule,InputTextModule,DataTableModule,SharedModule,ProgressSpinnerModule,GrowlModule,ConfirmDialogModule,ConfirmationService,ScheduleModule,SidebarModule } from 'primeng/primeng';
+import { 
+OverlayPanelModule,
+AccordionModule,
+PanelModule,
+FieldsetModule,
+CalendarModule,
+CarouselModule,
+DataGridModule,
+InputMaskModule,
+CheckboxModule,
+InputTextModule,
+DataTableModule,
+SharedModule,
+ProgressSpinnerModule,
+GrowlModule,
+ConfirmDialogModule,
+ConfirmationService,
+ScheduleModule,
+SidebarModule 
+} from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -61,6 +80,13 @@ import { LoginComponent } from './login/login.component';
     NewtaskformComponent, LoginComponent    
   ],
   imports: [
+    ProgressSpinnerModule,
+    OverlayPanelModule,
+    AccordionModule,
+    PanelModule,
+    FieldsetModule,
+    CalendarModule,
+    CarouselModule,
      BrowserModule,
      HttpModule,
      ScheduleModule,
@@ -75,12 +101,18 @@ import { LoginComponent } from './login/login.component';
      DataTableModule,
      CheckboxModule,
      InputMaskModule,
+     DataGridModule,
+     PanelModule,
      SharedModule,
      RouterModule.forRoot([      
        {
         path : '',
         component: LoginComponent//IndexComponent
-       },       
+       },     
+       {
+        path : 'index',
+        component: IndexComponent
+       },   
        {
         path : 'testing',
         component: TestingComponent,
